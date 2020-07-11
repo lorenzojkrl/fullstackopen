@@ -13,3 +13,4 @@ The course also contains a section on GraphQL, a modern alternative to REST APIs
 <h2>Part 6: State management with Redux</h2>
 <h2>Part 7: React router, styling app with CSS and webpack</h2>
 <h2>Part 8: GraphQL</h2>
+<h2>Part 9: Typescript</h2>
