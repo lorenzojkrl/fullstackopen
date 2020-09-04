@@ -1,4 +1,3 @@
-[![Runme](https://runme.io/static/button.svg)](https://runme.io/run?app_id=c9c7b45f-6da2-49d7-a008-0eb0ee997f20)
 
 <h1><a href="https://fullstackopen.com/en">Full Stack Open</a></h1>
 
