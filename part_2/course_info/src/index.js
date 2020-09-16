@@ -12,7 +12,7 @@ const Header = ({ course }) => {
 const Total = ({ course }) => {
   // Create array containing the number of exercises for each part
   const exercisesArray = course.parts.map(part => part.exercises);
-  // Creating and using reducer
+  // Creating and using reduce
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
   const sum = exercisesArray.reduce(reducer);
 
@@ -20,8 +20,8 @@ const Total = ({ course }) => {
     <div>
       <p><b>Total of {sum} exercises</b></p>
       {/* Validating */}
-      {console.log(exercisesArray)}
-      {console.log(exercisesArray.reduce(reducer))}
+      {/* {console.log(exercisesArray)}
+      {console.log(exercisesArray.reduce(reducer))} */}
 
     </div>
 
@@ -54,41 +54,63 @@ const Content = ({ course }) => {
 const Course = ({ course }) => {
   return (
     <div>
-      <Header course={course} />
-      <Content course={course} />
-      <Total course={course} />
+      {course.map(courseX => (
+        <div key={courseX.id}>
+          <Header key={courseX.name} course={courseX} />
+          <Content key={courseX.parts} course={courseX} />
+          <Total key={courseX.id} course={courseX} />
+        </div>
+      ))}
+
     </div>
   )
 }
 
 const App = () => {
-  const course = {
-    id: 1,
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10,
-        id: 1
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7,
-        id: 2
-      },
-      {
-        name: 'State of a component',
-        exercises: 14,
-        id: 3
-      },
-      {
-        name: 'Redux',
-        exercises: 11,
-        id: 4
-      }
-
-    ]
-  }
+  const course = [
+    {
+      id: 1,
+      name: 'Half Stack application development',
+      parts: [
+        {
+          name: 'Fundamentals of React',
+          exercises: 10,
+          id: 1
+        },
+        {
+          name: 'Using props to pass data',
+          exercises: 7,
+          id: 2
+        },
+        {
+          name: 'State of a component',
+          exercises: 14,
+          id: 3
+        },
+        {
+          name: 'Redux',
+          exercises: 11,
+          id: 4
+        }
+      ]
+    },
+    {
+      name: 'Node.js',
+      id: 2,
+      parts: [
+        {
+          name: 'Routing',
+          exercises: 3,
+          id: 1
+        },
+        {
+          name: 'Middlewares',
+          exercises: 7,
+          id: 2
+        }
+      ]
+    }
+  ]
 
   return <Course course={course} />
 }
