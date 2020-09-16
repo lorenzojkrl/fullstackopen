@@ -25,11 +25,25 @@ const Part = (props) => {
 }
 
 const Content = ({ course }) => {
+  // Just checking .map()
+  // const parti = course.parts.map(part => part);
+
   return (
     <div>
-      <Part part={course.parts[0]} />
+      {/* {console.log(parti)} */}
+      {/* <Part part={course.parts[0]} />
       <Part part={course.parts[1]} />
-      <Part part={course.parts[2]} />
+      <Part part={course.parts[2]} /> */}
+      {course.parts.map(part => <Part key={part.id} part={part} />)}
+    </div>
+  )
+}
+
+const Course = ({ course }) => {
+  return (
+    <div>
+      <Header course={course} />
+      <Content course={course} />
     </div>
   )
 }
@@ -54,6 +68,7 @@ const App = () => {
         exercises: 14,
         id: 3
       }
+
     ]
   }
 
