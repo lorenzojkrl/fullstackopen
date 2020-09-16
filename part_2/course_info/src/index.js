@@ -10,9 +10,21 @@ const Header = ({ course }) => {
 }
 
 const Total = ({ course }) => {
-  const sum = course.parts[0].exercises + course.parts[1].exercises + course.parts[2].exercises
+  // Create array containing the number of exercises for each part
+  const exercisesArray = course.parts.map(part => part.exercises);
+  // Creating and using reducer
+  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  const sum = exercisesArray.reduce(reducer);
+
   return (
-    <p>Number of exercises {sum}</p>
+    <div>
+      <p><b>Total of {sum} exercises</b></p>
+      {/* Validating */}
+      {console.log(exercisesArray)}
+      {console.log(exercisesArray.reduce(reducer))}
+
+    </div>
+
   )
 }
 
@@ -44,6 +56,7 @@ const Course = ({ course }) => {
     <div>
       <Header course={course} />
       <Content course={course} />
+      <Total course={course} />
     </div>
   )
 }
@@ -67,6 +80,11 @@ const App = () => {
         name: 'State of a component',
         exercises: 14,
         id: 3
+      },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4
       }
 
     ]
