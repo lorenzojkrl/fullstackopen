@@ -10,4 +10,3 @@ const Name = ({ newName }) => {
 };
 
 export default Name;
-
