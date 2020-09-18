@@ -1,6 +1,25 @@
 import React, { useState } from 'react'
 import Name from "./components/Name"
 
+const Filter = ({ persons, newName }) => {
+  let isInPhonebook = '';
+  const result = persons.filter(person => person.name === newName);
+  console.log("here is result", result)
+  if (newName === '') {
+    isInPhonebook = "Check";
+  } else if (result.length !== 0) {
+    isInPhonebook = `${newName} is already added to phonebook`
+  } else {
+    isInPhonebook = `${newName} is NOT into the phonebook`
+  }
+
+  return (
+    <div>
+      {isInPhonebook}
+    </div>
+  )
+}
+
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas' }
@@ -26,7 +45,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-
+      <Filter persons={persons} newName={newName} />
       <form onSubmit={addName}>
         <div>name: <input
           value={newName}

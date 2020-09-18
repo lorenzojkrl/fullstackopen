@@ -4,7 +4,7 @@ const Name = ({ newName }) => {
     return (
         <div>
             {newName}
-            {console.log("this is ", newName)}
+            {/* {console.log("this is ", newName)} */}
         </div>
     );
 };
