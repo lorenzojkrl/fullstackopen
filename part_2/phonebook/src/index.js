@@ -6,7 +6,6 @@ import App from './App';
 
 ReactDOM.render(
   <App />,
-  // <div>debug: {newName}</div>,
   document.getElementById('root')
 );
 

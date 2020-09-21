@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Name = ({ newName }) => {
+const Name = ({ newName, newNumber }) => {
     return (
         <div>
-            {newName}
+            {newName} {newNumber}
             {/* {console.log("this is ", newName)} */}
         </div>
     );

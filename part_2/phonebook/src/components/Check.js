@@ -1,8 +1,8 @@
 import React from 'react';
-// If Filter returns null, no JSX is used and no React, 
+// If Check returns null, no JSX is used and no React, 
 // comment import to mute warning React is not used
 
-const Filter = ({ persons, newName, setNewName }) => {
+const Check = ({ persons, newName, setNewName }) => {
     const result = persons.filter(person => person.name === newName);
     if (result.length !== 0) {
         window.alert(`${newName} is already added to phonebook`)
@@ -11,4 +11,4 @@ const Filter = ({ persons, newName, setNewName }) => {
     return (<div></div>);
 };
 
-export default Filter;
+export default Check;
