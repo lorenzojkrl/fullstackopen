@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Name from "./components/Name"
 import Check from "./components/Check"
+import PersonForm from "./components/PersonForm"
 
 
 
@@ -42,7 +43,7 @@ const App = () => {
       <h3>Add a new</h3>
       <Check persons={persons} newName={newName} setNewName={setNewName} />
 
-      <form onSubmit={addName}>
+      {/* <form onSubmit={addName}>
         <div>name: <input
           value={newName}
           onChange={handleNameChange}
@@ -55,10 +56,15 @@ const App = () => {
         <div>
           <button type="submit" >add</button>
         </div>
-      </form>
+      </form> */}
 
-
-
+      <PersonForm
+        addName={addName}
+        newName={newName}
+        newNumber={newNumber}
+        handleNameChange={handleNameChange}
+        handleNumberChange={handleNumberChange}
+      />
 
       <h2>Numbers</h2>
       { persons.map(person => <Name key={person.name} newName={person.name} newNumber={person.number} />)}
