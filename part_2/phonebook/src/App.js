@@ -10,14 +10,21 @@ const App = () => {
     { name: 'Arto Hellas', number: '040-1234567' },
     { name: 'Ada Lovelace', number: '39-44-5323523' },
     { name: 'Dan Abramov', number: '12-43-234345' },
+    { name: 'Mary Poppendieck', number: '39-23-6423122' }
   ])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [newFilter, setNewFilter] = useState(persons)
+
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <Filter />
+      <Filter
+        persons={persons}
+        newFilter={newFilter}
+        setNewFilter={setNewFilter}
+      />
       <h3>Add a new</h3>
 
       <PersonForm
@@ -28,6 +35,8 @@ const App = () => {
         setNewName={setNewName}
         setNewNumber={setNewNumber}
       />
+      {console.log(`persons`, persons)}
+      {console.log(`newFilter`, newFilter)}
 
       <h2>Numbers</h2>
       <Persons persons={persons} />
