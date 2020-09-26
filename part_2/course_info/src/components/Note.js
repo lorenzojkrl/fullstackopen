@@ -48,7 +48,7 @@ const Content = ({ course }) => {
     )
 }
 
-const Course = ({ course }) => {
+const Note = ({ course }) => {
     return (
         <div>
             {course.map(courseX => (
@@ -63,5 +63,5 @@ const Course = ({ course }) => {
     )
 }
 
-export default Course;
+export default Note;
 
