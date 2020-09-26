@@ -10,7 +10,7 @@ const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-  const [filterName, setFilter] = useState(persons)
+  const [filterName, setFilter] = useState([])
 
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const App = () => {
       .then(response => {
         console.log('promise fulfilled')
         setPersons(response.data)
+        setFilter(response.data)
       })
   }, [])
   console.log(`initial render: ${persons.length} persons `)
