@@ -23,7 +23,10 @@ const App = () => {
         setFilter(response.data)
       })
   }, [])
-  console.log(`initial render: ${persons.length} persons `)
+  // This is to understand how axios and promises work
+  console.log(`initial render of persons: ${persons.length} persons `)
+  console.log(`initial render of filterName: ${filterName.length} persons `)
+
 
   return (
     <div>

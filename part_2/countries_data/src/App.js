@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import Filter from "./components/Filter"
-import axios from 'axios';
+import getCountries from "./services/getCountries";
 import './App.css';
+import Countries from './components/Countries';
 
 const App = () => {
   const [countries, setCountries] = useState([])
-  const [filterCountry, setFilter] = useState('')
+  const [filterCountry, setFilter] = useState("")
 
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('https://restcountries.eu/rest/v2/all')
-      .then(response => {
-        console.log('promise fulfilled')
-        setCountries(response.data)
+    getCountries().then(response => setCountries(response));
+  }, []);
 
-      })
-  }, [])
-  console.log(`initial render: ${countries.length} countries `)
+  console.log(`initial render of countries: ${countries.length} persons `)
+
 
 
   return (
     <div>
-      <Filter />
+      <Filter
+        countries={countries}
+        setCountries={setCountries}
+        filterCountry={filterCountry}
+        setFilter={setFilter}
+      />
+
+
+      <Countries countries={countries} />
     </div>
   );
 }
