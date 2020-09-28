@@ -9,24 +9,24 @@ const App = () => {
   const [filterCountry, setFilter] = useState("")
 
   useEffect(() => {
-    getCountries().then(response => setCountries(response));
+    getCountries()
+      .then(response => setCountries(response))
   }, []);
 
   console.log(`initial render of countries: ${countries.length} persons `)
+  console.log(`initial render of filterCountry: ${filterCountry.length} persons `)
+
+  // 
 
 
 
   return (
     <div>
       <Filter
-        countries={countries}
-        setCountries={setCountries}
         filterCountry={filterCountry}
         setFilter={setFilter}
       />
-
-
-      <Countries countries={countries} />
+      <Countries countries={countries} filterCountry={filterCountry} />
     </div>
   );
 }

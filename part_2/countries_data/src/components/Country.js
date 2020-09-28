@@ -1,22 +1,31 @@
-import React, { useState } from "react";
-// import Weather from "./Weather";
+import React from "react";
 
-const Country = ({ name, capital, population, languages, flagUrl }) => {
+
+const Country = ({ country }) => {
     return (
         <div>
-            <h1>{name}</h1>
-            <p>capital {capital}</p>
-            <p>population {population}</p>
-            <h3>languages</h3>
+            <h1>{country.name}</h1>
+            <p>Capital: {country.capital}</p>
+            <p>Population: {country.population}</p>
+            <h3>Languages: </h3>
             <ul>
-                {languages.map(language => (
+                {country.languages.map(language => (
                     <li key={language.name}>{language.name}</li>
                 ))}
             </ul>
-            <img src={flagUrl} alt="No flag found" height="250" width="350" />
-            {/* <Weather capital={capital} /> */}
+
+            <img
+                src={country.flag}
+                alt="No flag found"
+                height="150"
+                width="250"
+
+            />
+
         </div>
     );
 };
 
 export default Country;
+
+// name, capital, population, languages, flagUrl 

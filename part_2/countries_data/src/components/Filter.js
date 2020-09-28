@@ -1,19 +1,23 @@
 import React from 'react';
 
-const Filter = ({ countries, setCountries, filter, setFilter }) => {
+// Component represents an input form
+// Assign filterCountry to the value attribute (initialized to "")
+// and trigger the handleFilter function
 
-    const handleFilterContact = (event) => {
-        event.preventDefault()
-        setFilter(countries.filter(country => country.name.toLowerCase().includes(event.target.value.toLowerCase())))
-        // console.log("filterName ", filterName)
+const Filter = ({ filterCountry, setFilter }) => {
 
-    }
+    // Set the state of filterCountry to the value of the value attribute in the form 
+    const handleFilter = event => {
+        setFilter(event.target.value);
+    };
 
     return (
+
         <div>Find Countries:
             <input
-                type="text"
-                onChange={handleFilterContact}
+                type="text" // default
+                value={filterCountry} // current value of the form & submitted with it 
+                onChange={handleFilter}
             />
         </div>
     );
