@@ -16,10 +16,6 @@ const App = () => {
   console.log(`initial render of countries: ${countries.length} persons `)
   console.log(`initial render of filterCountry: ${filterCountry.length} persons `)
 
-  // 
-
-
-
   return (
     <div>
       <Filter
