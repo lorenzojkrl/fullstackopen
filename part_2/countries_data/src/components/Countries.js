@@ -1,5 +1,6 @@
 import React from 'react';
 import Country from "./Country";
+import ShowButton from "./ShowButton";
 
 const Countries = ({ countries, filterCountry }) => {
     // const entries = countries.filter(country =>
@@ -69,14 +70,12 @@ const Countries = ({ countries, filterCountry }) => {
                         country.name.toUpperCase().includes(filterCountry.toUpperCase())
                     )
                     .map(country => (
-                        <li key={country.name}>{country.name}</li>
+
+                        <li key={country.name}><ShowButton name={country.name} /></li>
+
                     ))}
 
-                {/* The following code display a list of all the countries
-                FIlter is not in use and has no effect on this list
-                {countries.map(country => (
-                    <li key={country.name}>{country.name}</li>
-                ))} */}
+
             </ul>
         );
     }
