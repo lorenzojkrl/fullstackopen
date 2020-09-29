@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Country from "./Country";
-import ShowButton from "./ShowButton";
+import ShowButton from "./ShowCountry";
 
 const Countries = ({ countries, filterCountry }) => {
+    const [showComponent, setShowComponent] = useState(false)
     // const entries = countries.filter(country =>
     //     country.name.toUpperCase().includes(filterCountry.toUpperCase())
     // );
@@ -42,9 +43,11 @@ const Countries = ({ countries, filterCountry }) => {
             country.name.toUpperCase().includes(filterCountry.toUpperCase()))
         .map(country => country.name)
         .length
-    console.log("len of resault", result)
+    console.log("len of result", result)
+    // console.log("showCountry state", showCountry)
 
-    if (result === 250) {
+
+    if (result >= 250) {
         return (
             <div>
                 <p>Start by typing the name of the country</p>
@@ -70,17 +73,16 @@ const Countries = ({ countries, filterCountry }) => {
                         country.name.toUpperCase().includes(filterCountry.toUpperCase())
                     )
                     .map(country => (
-
-                        <li key={country.name}><ShowButton name={country.name} /></li>
-
+                        <li key={country.name}><ShowButton
+                            country={country}
+                            showComponent={showComponent}
+                            setShowComponent={setShowComponent} /></li>
                     ))}
-
-
             </ul>
         );
     }
     return (
-        <ul>
+        <div>
             {countries
                 .filter(country =>
                     country.name.toUpperCase().includes(filterCountry.toUpperCase())
@@ -88,7 +90,7 @@ const Countries = ({ countries, filterCountry }) => {
                 .map(country => (
                     <Country key={country.name} country={country} />
                 ))}
-        </ul>
+        </div>
     );
 
 
