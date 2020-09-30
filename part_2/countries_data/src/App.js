@@ -3,6 +3,7 @@ import Filter from "./components/Filter"
 import getCountries from "./services/getCountries";
 import './App.css';
 import Countries from './components/Countries';
+import getWeather from "./services/getWeather";
 
 const App = () => {
   const [countries, setCountries] = useState([])
@@ -22,6 +23,9 @@ const App = () => {
         filterCountry={filterCountry}
         setFilter={setFilter}
       />
+      {/* Trying out stuff */}
+      {/* {process.env.NODE_ENV} */}
+      {console.log(getWeather())}
       <Countries countries={countries} filterCountry={filterCountry} />
     </div>
   );
