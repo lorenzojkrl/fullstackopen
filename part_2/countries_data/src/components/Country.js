@@ -8,7 +8,7 @@ const Country = ({ country }) => {
             <h1>{country.name}</h1>
             <p>Capital: {country.capital}</p>
             <p>Population: {country.population}</p>
-            <h3>Languages: </h3>
+            <h3>Spoken Languages: </h3>
             <ul>
                 {country.languages.map(language => (
                     <li key={language.name}>{language.name}</li>

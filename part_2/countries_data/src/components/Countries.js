@@ -1,41 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Country from "./Country";
 import ShowButton from "./ShowCountry";
+import Weather from "./Weather";
+import getWeather from "../services/getWeather";
 
 const Countries = ({ countries, filterCountry }) => {
     const [showComponent, setShowComponent] = useState(false)
-    // const entries = countries.filter(country =>
-    //     country.name.toUpperCase().includes(filterCountry.toUpperCase())
-    // );
+    const [weather, setWeather] = useState("")
 
-    // if (entries.length >= 10) {
-    //     return <p>Too many matches, specify another filter</p>;
-    // }
-    // if (showCountry !== undefined) {
-    //     return (
-    //         <Country
-    //             key={showCountry.name}
-    //             name={showCountry.name}
-    //             capital={showCountry.capital}
-    //             population={showCountry.population}
-    //             languages={showCountry.languages}
-    //             flagUrl={showCountry.flag}
-    //         />
-    //     );
-    // }
-    // if (entries.length > 1) {
-    //     return (
-    //         <ul>
-    //             {countries
-    //                 .filter(country =>
-    //                     country.name.toUpperCase().includes(filterCountry.toUpperCase())
-    //                 )
-    //                 .map(country => (
-    //                     country.name
-    //                 ))}
-    //         </ul>
-    //     );
-    // }
+    useEffect(() => {
+        getWeather()
+            .then(response => setWeather(response))
+    }, []);
 
     // counts the number of coutries filtered & save it to result
     let result = countries
@@ -73,10 +49,13 @@ const Countries = ({ countries, filterCountry }) => {
                         country.name.toUpperCase().includes(filterCountry.toUpperCase())
                     )
                     .map(country => (
-                        <li key={country.name}><ShowButton
-                            country={country}
-                            showComponent={showComponent}
-                            setShowComponent={setShowComponent} /></li>
+                        <li key={country.name}>
+                            <ShowButton
+                                country={country}
+                                showComponent={showComponent}
+                                setShowComponent={setShowComponent}
+                            />
+                        </li>
                     ))}
             </ul>
         );
@@ -88,8 +67,11 @@ const Countries = ({ countries, filterCountry }) => {
                     country.name.toUpperCase().includes(filterCountry.toUpperCase())
                 )
                 .map(country => (
-                    <Country key={country.name} country={country} />
-
+                    <div key={country.name}>
+                        <Country country={country} />
+                        <Weather country={country} weather={weather} />
+                        {console.log("here is weather", weather)}
+                    </div>
                 ))}
         </div>
     );
