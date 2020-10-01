@@ -25,3 +25,6 @@ const App = () => {
 }
 
 export default App;
+
+// Get an api key from https://weatherstack.com/ and use it to start the app as follow
+// REACT_APP_API_KEY='YOUR API KEY HERE' npm start 
