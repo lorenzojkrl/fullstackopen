@@ -13,20 +13,12 @@ const App = () => {
       .then(response => setCountries(response))
   }, []);
 
-  console.log(`initial render of countries: ${countries.length} persons `)
-  console.log(`initial render of filterCountry: ${filterCountry.length} persons `)
-
   return (
     <div>
       <Filter
         filterCountry={filterCountry}
         setFilter={setFilter}
       />
-      {/* Trying out stuff */}
-      {/* {process.env.NODE_ENV} */}
-      {/* Weather API works if next line prints something on console  */}
-      {/* {console.log(getWeather())} */}
-
       <Countries countries={countries} filterCountry={filterCountry} />
     </div>
   );

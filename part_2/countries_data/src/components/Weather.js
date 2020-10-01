@@ -1,13 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import getWeather from "../services/getWeather";
 
-const Weather = ({ country, weather }) => {
-    return (
+
+const Weather = ({ capital }) => {
+    const [weather, setWeather] = useState([])
+    const [hasData, setHasData] = useState(false);
+
+    useEffect(() => {
+        getWeather(capital)
+            .then(data => {
+                setHasData(true)
+                setWeather({
+                    temperature: data.current.temperature,
+                    icon: data.current.weather_icons[0],
+                    windSpeed: data.current.wind_speed,
+                    windDirection: data.current.wind_dir
+                })
+            })
+    }, []);
+
+
+    return hasData ? (
         <div>
-            <h3>Weather in {country.capital} </h3>
-            <p>Temperature: {weather.current.temperature} Celsius</p>
-            <p>Wind: {weather.current.wind_speed} mph, direction {weather.current.wind_dir} </p>
+            {/* {console.log("Inside Weather response", weather)} */}
+            <h3>Weather in {capital} </h3>
+            <p>Temperature: {weather.temperature} Celsius</p>
+            <p><img src={weather.icon} alt="icon" /></p>
+            <p>Wind: {weather.windSpeed} mph, direction {weather.windDirection} </p>
         </div>
-    );
+    ) : null;
 };
 
 export default Weather;
