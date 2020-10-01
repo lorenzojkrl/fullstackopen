@@ -1,18 +1,9 @@
 import React, { useState } from 'react';
 import Country from "./Country";
 import ShowButton from "./ShowCountry";
-import Weather from "./Weather";
-// import getWeather from "../services/getWeather";
 
 const Countries = ({ countries, filterCountry }) => {
     const [showComponent, setShowComponent] = useState(false)
-
-    // const [choosenCapital, setChoosenCapital] = useState("Helsinki")
-
-    // useEffect(() => {
-    //     getWeather("Helsinki")
-    //         .then(response => setWeather(response))
-    // }, []);
 
     // counts the number of coutries filtered & save it to result
     let result = countries
@@ -20,9 +11,6 @@ const Countries = ({ countries, filterCountry }) => {
             country.name.toUpperCase().includes(filterCountry.toUpperCase()))
         .map(country => country.name)
         .length
-    // console.log("len of result", result)
-    // console.log("showCountry state", showCountry)
-
 
     if (result >= 250) {
         return (
@@ -70,7 +58,6 @@ const Countries = ({ countries, filterCountry }) => {
                 .map(country => (
                     <div key={country.name}>
                         <Country country={country} />
-                        <Weather capital={country.capital} />
                     </div>
                 ))}
         </div>
