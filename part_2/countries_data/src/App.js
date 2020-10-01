@@ -25,7 +25,9 @@ const App = () => {
       />
       {/* Trying out stuff */}
       {/* {process.env.NODE_ENV} */}
+      {/* Weather API works if next line prints something on console  */}
       {console.log(getWeather())}
+
       <Countries countries={countries} filterCountry={filterCountry} />
     </div>
   );

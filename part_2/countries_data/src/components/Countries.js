@@ -89,6 +89,7 @@ const Countries = ({ countries, filterCountry }) => {
                 )
                 .map(country => (
                     <Country key={country.name} country={country} />
+
                 ))}
         </div>
     );
