@@ -1,6 +1,6 @@
 import React from 'react';
 // import axios from 'axios';
-import noteService from "../services/personBackEnd"
+import personService from "../services/personBackEnd"
 
 const PersonForm = ({ persons, setPersons, newName, newNumber, setNewName, setNewNumber, setFilter }) => {
 
@@ -12,7 +12,7 @@ const PersonForm = ({ persons, setPersons, newName, newNumber, setNewName, setNe
             id: newName,
         }
 
-        noteService
+        personService
             .create(nameObject)
             .then(returnedName => {
                 console.log(returnedName)
