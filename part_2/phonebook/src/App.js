@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import PersonForm from "./components/PersonForm"
 import Persons from "./components/Persons"
 import Filter from "./components/Filter"
-import axios from 'axios';
+// import axios from 'axios';
+import personService from "./services/personBackEnd"
+
 
 
 
@@ -15,12 +17,12 @@ const App = () => {
 
   useEffect(() => {
     // console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
+    personService
+      .getAll()
+      .then(initialPersons => {
         // console.log('promise fulfilled')
-        setPersons(response.data)
-        setFilter(response.data)
+        setPersons(initialPersons)
+        setFilter(initialPersons)
       })
   }, [])
   // This is to understand how axios and promises work
