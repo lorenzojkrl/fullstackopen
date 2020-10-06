@@ -14,18 +14,18 @@ const App = () => {
 
 
   useEffect(() => {
-    console.log('effect')
+    // console.log('effect')
     axios
       .get('http://localhost:3001/persons')
       .then(response => {
-        console.log('promise fulfilled')
+        // console.log('promise fulfilled')
         setPersons(response.data)
         setFilter(response.data)
       })
   }, [])
   // This is to understand how axios and promises work
-  console.log(`initial render of persons: ${persons.length} persons `)
-  console.log(`initial render of filterName: ${filterName.length} persons `)
+  // console.log(`initial render of persons: ${persons.length} persons `)
+  // console.log(`initial render of filterName: ${filterName.length} persons `)
 
 
   return (

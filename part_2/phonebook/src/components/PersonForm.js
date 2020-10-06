@@ -1,13 +1,21 @@
 import React from 'react';
+import axios from 'axios';
 
 const PersonForm = ({ persons, setPersons, newName, newNumber, setNewName, setNewNumber, setFilter }) => {
-    const addName = (event) => {
+
+    const addName = event => {
         event.preventDefault()
         const nameObject = {
             name: newName,
             number: newNumber,
             id: newName,
         }
+        axios
+            .post('http://localhost:3001/persons', nameObject)
+            .then(response => {
+                console.log(response)
+            })
+
         setPersons(persons.concat(nameObject))
         setFilter(persons.concat(nameObject))
         setNewName('')
