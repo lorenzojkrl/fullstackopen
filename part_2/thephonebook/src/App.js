@@ -24,8 +24,14 @@ const App = () => {
 
   // called every time a change occurs in the input element
   const handleNewName = event => {
-    console.log(event.target.value)
+    console.log(" handleNewName", event.target.value)
     setNewName(event.target.value)
+  }
+
+  const isDuplicate = persons.filter(person => person.name === newName);
+  if (isDuplicate.length !== 0) {
+    window.alert(`${newName} is already added to phonebook`)
+    setNewName('')
   }
 
   return (
@@ -46,7 +52,7 @@ const App = () => {
       {persons.map(person =>
         <DisplayContact key={person.id} person={person} />
       )}
-      <div>debug: {newName}</div>
+      <div>debug2: {newName}</div>
     </div>
   )
 }
