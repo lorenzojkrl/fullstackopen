@@ -1,9 +1,14 @@
 import React from 'react';
 
-const DisplayContact = ({ person }) => {
+const DisplayContact = ({ persons }) => {
+
+
     return (
-        <div>
-            {person.name}
+        <div >
+            {persons.map(person => <div key={person.name}>
+                {person.name}: {person.number}
+            </div>)}
+
         </div>
     );
 };

@@ -5,10 +5,13 @@ const App = () => {
   const [persons, setPersons] = useState([
     {
       name: 'Arto Hellas',
+      number: 11223344,
       id: 'Artooooo'
     }
   ])
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
+
 
   const addContact = event => {
     // prevents the default action of submitting a form, not in input
@@ -16,16 +19,23 @@ const App = () => {
     console.log('button clicked', event.target)
     const contactObj = {
       name: newName,
+      number: newNumber,
       id: newName
     }
-    setNewName('')
     setPersons(persons.concat(contactObj))
+    setNewName('')
+    setNewNumber('')
   }
 
   // called every time a change occurs in the input element
   const handleNewName = event => {
     console.log(" handleNewName", event.target.value)
     setNewName(event.target.value)
+  }
+
+  const handleNewNumber = event => {
+    console.log(" handleNewNumber", event.target.value)
+    setNewNumber(event.target.value)
   }
 
   const isDuplicate = persons.filter(person => person.name === newName);
@@ -39,9 +49,15 @@ const App = () => {
       <h2>Phonebook</h2>
       <form onSubmit={addContact}>
         <div>
-          name: <input
+          Name: <input
             value={newName}
             onChange={handleNewName}
+          />
+        </div>
+        <div>
+          Number: <input
+            value={newNumber}
+            onChange={handleNewNumber}
           />
         </div>
         <div>
@@ -49,9 +65,9 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map(person =>
-        <DisplayContact key={person.id} person={person} />
-      )}
+
+      <DisplayContact persons={persons} />
+      <br></br>
       <div>debug2: {newName}</div>
     </div>
   )
