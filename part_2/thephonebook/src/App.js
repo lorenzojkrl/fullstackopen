@@ -32,10 +32,30 @@ const App = () => {
         setNewName('')
         setNewNumber('')
         setPersons(persons.concat(returnedContact))
-
       })
   }
 
+  const removeContact = event => {
+    event.preventDefault()
+    let delConfirmed = window.confirm(`Delete ${event.target.value}`)
+    console.log(delConfirmed)
+    if (delConfirmed) {
+      console.log(`remove ${event.target.value}`)
+      personsService
+        .remove(event.target.value)
+        .then(outcome => {
+          console.log(outcome) // confirm deletion in console
+          setPersons(persons)
+        })
+        .catch(error => {
+          console.log('fail')
+        })
+    }
+    setNewName(' ')
+    setPersons(persons)
+
+
+  }
 
   const handleNewName = event => {
     setNewName(event.target.value)
@@ -59,8 +79,6 @@ const App = () => {
     ? persons.filter(contact => contact.name.toLowerCase().includes(showFilter.toLowerCase()))
     : persons
 
-
-
   return (
     <div>
       <h2>Phonebook</h2>
@@ -79,10 +97,12 @@ const App = () => {
       />
 
       <h3>Numbers</h3>
-      <DisplayContact persons={contactsToShow} />
+      <DisplayContact
+        persons={contactsToShow}
+        removeContact={removeContact}
+      />
 
-      <br />
-      <div>debug2: {newName}</div>
+
     </div>
   )
 }
