@@ -37,22 +37,32 @@ const App = () => {
 
   const removeContact = event => {
     event.preventDefault()
-    let delConfirmed = window.confirm(`Delete ${event.target.value}`)
-    console.log(delConfirmed)
+    // Change to name of the contact to be deleted!
+
+    let deleteThis = persons.find(person => person.id === Number(event.target.value))
+
+    let delConfirmed = window.confirm(`Delete ${deleteThis.name}`)
+    // console.log(delConfirmed)
     if (delConfirmed) {
-      console.log(`remove ${event.target.value}`)
+      // console.log(`remove ${event.target.value}`)
+
       personsService
         .remove(event.target.value)
         .then(outcome => {
-          console.log(outcome) // confirm deletion in console
-          setPersons(persons)
+          // console.log(outcome) // confirm deletion in console
+          // Fetch everything from db.json again, not efficient but re-render component immediately after .delete
+          personsService
+            .getAll() // calls axios.get passing url, , returns response.data
+            .then(dbData => {
+              setPersons(dbData) // Assigns persons in db.json to persons
+            })
         })
         .catch(error => {
           console.log('fail')
         })
     }
-    setNewName(' ')
-    setPersons(persons)
+    // setNewName(' ')
+    // setPersons(persons)
 
 
   }
