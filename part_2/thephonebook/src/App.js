@@ -26,13 +26,36 @@ const App = () => {
       number: newNumber
     }
 
-    personsService
-      .create(contactObj)  // calls axios.post passing url and contactObj, returns response.data
-      .then(returnedContact => {
-        setNewName('')
-        setNewNumber('')
-        setPersons(persons.concat(returnedContact))
-      })
+    // Not so elegant, to be reviewed
+    const isNameDuplicate = persons.filter(person => person.name === newName);
+    const found = persons.find(element => element.name === newName);
+    // console.log("found id: ", found.id)
+    if (isNameDuplicate.length !== 0) {
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        personsService
+          .update(found.id, contactObj)
+          .then(returnedContact => {
+            // Fetch everything from db.json again, not efficient but re-render component immediately after .update
+            personsService
+              .getAll() // calls axios.get passing url, , returns response.data
+              .then(dbData => {
+                setPersons(dbData) // Assigns persons in db.json to persons
+                setNewName('')
+                setNewNumber('')
+              })
+          })
+      }
+    } else {
+      personsService
+        .create(contactObj)  // calls axios.post passing url and contactObj, returns response.data
+        .then(returnedContact => {
+          setNewName('')
+          setNewNumber('')
+          setPersons(persons.concat(returnedContact))
+        })
+    }
+
+
   }
 
   const removeContact = event => {
@@ -75,11 +98,13 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
-  const isDuplicate = persons.filter(person => person.name === newName);
-  if (isDuplicate.length !== 0) {
-    window.alert(`${newName} is already added to phonebook`)
-    setNewName('')
-  }
+  // Functionality changed to allow number updates
+  // const isNameDuplicate = persons.filter(person => person.name === newName);
+  // if (isNameDuplicate.length !== 0) {
+  //   window.alert(`${newName} is already added to phonebook`)
+  //   setNewName('')
+  // }
+
 
   const handleFilter = event => {
     setShowFilter(event.target.value)
