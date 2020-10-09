@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import DisplayContact from "./components/DisplayContact"
+import Filter from "./components/Filter"
+import PersonForm from "./components/PersonForm"
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -26,6 +28,8 @@ const App = () => {
     setNewName('')
     setNewNumber('')
   }
+
+  // Keep event handlers in App to move the setter higher
 
   // called every time a change occurs in the input element
   const handleNewName = event => {
@@ -58,34 +62,26 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>
-        Filter shown with: <input
-          value={showFilter}
-          onChange={handleFilter}
-        />
-      </div>
-      <h2>Add a new</h2>
-      <form onSubmit={addContact}>
-        <div>
-          Name: <input
-            value={newName}
-            onChange={handleNewName}
-          />
-        </div>
-        <div>
-          Number: <input
-            value={newNumber}
-            onChange={handleNewNumber}
-          />
-        </div>
-        <div>
-          <button type="submit">Add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
+      <Filter
+        showFilter={showFilter}
+        handleFilter={handleFilter}
+      />
+
+      <h3>Add a new</h3>
+      <PersonForm
+        addContact={addContact}
+        newName={newName}
+        handleNewName={handleNewName}
+        newNumber={newNumber}
+        handleNewNumber={handleNewNumber}
+      />
+
+      <h3>Numbers</h3>
       {/* Shows all the contacts in the array */}
       <DisplayContact persons={contactsToShow} />
-      <br></br>
+
+
+      <br />
       <div>debug2: {newName}</div>
     </div>
   )
