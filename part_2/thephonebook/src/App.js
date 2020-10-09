@@ -3,12 +3,14 @@ import DisplayContact from "./components/DisplayContact"
 import Filter from "./components/Filter"
 import PersonForm from "./components/PersonForm"
 import personsService from "./services/personsService"
+import Notification from "./components/Notification"
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [showFilter, setShowFilter] = useState('')
+  const [notification, setNotification] = useState('')
 
   useEffect(() => {
     personsService
@@ -42,6 +44,10 @@ const App = () => {
                 setPersons(dbData) // Assigns persons in db.json to persons
                 setNewName('')
                 setNewNumber('')
+                setNotification(`${newName} number updated`)
+                setTimeout(() => {
+                  setNotification('')
+                }, 3000);
               })
           })
       }
@@ -52,6 +58,10 @@ const App = () => {
           setNewName('')
           setNewNumber('')
           setPersons(persons.concat(returnedContact))
+          setNotification(`Added ${contactObj.name}`)
+          setTimeout(() => {
+            setNotification('')
+          }, 3000);
         })
     }
 
@@ -117,6 +127,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notification} />
       <Filter
         showFilter={showFilter}
         handleFilter={handleFilter}
