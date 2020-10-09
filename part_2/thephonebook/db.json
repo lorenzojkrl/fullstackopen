@@ -19,6 +19,41 @@
       "name": "Mary Poppendieck",
       "number": "39-23-6423122",
       "id": 4
+    },
+    {
+      "name": "qwerty",
+      "number": "123-456",
+      "id": 5
+    },
+    {
+      "name": "Tiziano",
+      "number": "1245-6789",
+      "id": 6
+    },
+    {
+      "name": "Maria Stuarda",
+      "number": "78945/6598",
+      "id": 7
+    },
+    {
+      "name": "Satana",
+      "number": "78945",
+      "id": 8
+    },
+    {
+      "name": "Mario Santa",
+      "number": "1234-678",
+      "id": 9
+    },
+    {
+      "name": "Siltanen",
+      "number": "11-22345",
+      "id": 10
+    },
+    {
+      "name": ";",
+      "number": ";",
+      "id": 11
     }
   ]
 }

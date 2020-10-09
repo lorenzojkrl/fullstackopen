@@ -24,11 +24,11 @@ const App = () => {
 
   // Using useEffect, update persons state fetching data from db.json
   useEffect(() => {
-    console.log('effect')
+    // console.log('effect')
     axios
       .get('http://localhost:3001/persons')
       .then(response => {
-        console.log('promise fulfilled')
+        // console.log('promise fulfilled')
         setPersons(response.data)
       })
   }, [])
@@ -42,34 +42,47 @@ const App = () => {
   // which prints 'promise fulfilled'
   // and stores the data from the server into the state using setPersons(response.data)
   // a call to a state-updating function triggers the re-rendering of the component (persons.length = 4).
-  console.log('render', persons.length, 'contacts')
-  console.log('Indeed!')
+  // console.log('render', persons.length, 'contacts')
+  // console.log('Indeed!')
 
 
   const addContact = event => {
     // prevents the default action of submitting a form, not in input
     event.preventDefault()
-    console.log('button clicked', event.target)
+    // console.log('button clicked', event.target)
     const contactObj = {
       name: newName,
-      number: newNumber,
-      id: newName
+      number: newNumber
+      // omit the id property, 
+      // let the server generate ids for our resources
+      // id: newName
     }
-    setPersons(persons.concat(contactObj))
-    setNewName('')
-    setNewNumber('')
+
+    axios
+      .post('http://localhost:3001/persons', contactObj)
+      .then(response => {
+        setNewName('')
+        setNewNumber('')
+        setPersons(persons.concat(response.data))
+
+      })
+    // moved inside axios.then to re-render with the new contact after axios.post
+    // Swap order to clean setNewName state to avoid raising duplicate alert 
+    // setPersons(persons.concat(contactObj))
+    // setNewName('')
+    // setNewNumber('')
   }
 
   // Keep event handlers in App to move the setter higher
 
   // called every time a change occurs in the input element
   const handleNewName = event => {
-    console.log(" handleNewName", event.target.value)
+    // console.log(" handleNewName", event.target.value)
     setNewName(event.target.value)
   }
 
   const handleNewNumber = event => {
-    console.log(" handleNewNumber", event.target.value)
+    // console.log(" handleNewNumber", event.target.value)
     setNewNumber(event.target.value)
   }
 
@@ -81,7 +94,7 @@ const App = () => {
 
   // Assing input value to setShowFilter to update the value of showFilter
   const handleFilter = event => {
-    console.log(" handleFilter", event.target.value)
+    // console.log(" handleFilter", event.target.value)
     setShowFilter(event.target.value)
   }
 
