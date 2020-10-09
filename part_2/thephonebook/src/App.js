@@ -11,6 +11,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [showFilter, setShowFilter] = useState('')
   const [notification, setNotification] = useState('')
+  const [isSuccessful, setSuccess] = useState(true) // this is used to select which notification class to use in Notification.js. Not efficient but it works, to be reviewed
 
   useEffect(() => {
     personsService
@@ -49,7 +50,13 @@ const App = () => {
                   setNotification('')
                 }, 3000);
               })
+              .catch(console.log("Error, no data from server"))
           })
+          .catch(error => {
+            setSuccess(false)
+            setNotification(`Information of ${newName} has already been removed from server`)
+          })
+
       }
     } else {
       personsService
@@ -63,6 +70,8 @@ const App = () => {
             setNotification('')
           }, 3000);
         })
+        .catch(console.log("Failed addition"))
+
     }
 
 
@@ -127,7 +136,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={notification} />
+      <Notification message={notification} isSuccessful={isSuccessful} />
       <Filter
         showFilter={showFilter}
         handleFilter={handleFilter}
