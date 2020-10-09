@@ -2,7 +2,7 @@ import React from 'react';
 // import axios from 'axios';
 import personService from "../services/personBackEnd"
 
-const PersonForm = ({ persons, setPersons, newName, newNumber, setNewName, setNewNumber, setFilter }) => {
+const PersonForm = ({ persons, setPersons, newName, newNumber, setNewName, setNewNumber, setFilter, setNotificationMessage }) => {
 
     const addName = event => {
         event.preventDefault()
@@ -22,6 +22,7 @@ const PersonForm = ({ persons, setPersons, newName, newNumber, setNewName, setNe
         setFilter(persons.concat(nameObject))
         setNewName('')
         setNewNumber('')
+        setNotificationMessage(`$Added {nameObject.name}`)
     }
 
     const handleNameChange = (event) => {
