@@ -3,14 +3,14 @@ import DisplayContact from "./components/DisplayContact"
 
 const App = () => {
   const [persons, setPersons] = useState([
-    {
-      name: 'Arto Hellas',
-      number: 11223344,
-      id: 'Artooooo'
-    }
+    { name: 'Arto Hellas', number: '040-123456' },
+    { name: 'Ada Lovelace', number: '39-44-5323523' },
+    { name: 'Dan Abramov', number: '12-43-234345' },
+    { name: 'Mary Poppendieck', number: '39-23-6423122' }
   ])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [showFilter, setShowFilter] = useState('')
 
 
   const addContact = event => {
@@ -44,9 +44,27 @@ const App = () => {
     setNewName('')
   }
 
+  // Assing input value to setShowFilter to update the value of showFilter
+  const handleFilter = event => {
+    console.log(" handleFilter", event.target.value)
+    setShowFilter(event.target.value)
+  }
+
+  // if showFilter true, filter the contacts that contain the letters in showFilter (e.g. used to filter), else show all
+  const contactsToShow = showFilter
+    ? persons.filter(contact => contact.name.toLowerCase().includes(showFilter.toLowerCase()))
+    : persons
+
   return (
     <div>
       <h2>Phonebook</h2>
+      <div>
+        Filter shown with: <input
+          value={showFilter}
+          onChange={handleFilter}
+        />
+      </div>
+      <h2>Add a new</h2>
       <form onSubmit={addContact}>
         <div>
           Name: <input
@@ -65,8 +83,8 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-
-      <DisplayContact persons={persons} />
+      {/* Shows all the contacts in the array */}
+      <DisplayContact persons={contactsToShow} />
       <br></br>
       <div>debug2: {newName}</div>
     </div>
