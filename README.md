@@ -15,3 +15,4 @@ The course also contains a section on GraphQL, a modern alternative to REST APIs
 <h3>Part 7: React router, styling app with CSS and webpack</h3>
 <h3>Part 8: GraphQL</h3>
 <h3>Part 9: Typescript</h3>
+<h3>Part 10: React Native</h3>
