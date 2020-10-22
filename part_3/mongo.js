@@ -8,37 +8,30 @@ const personSchema = new mongoose.Schema({
 
 const Person = mongoose.model('Person', personSchema)
 
+const password = process.argv[2]
+const url =
+    `mongodb+srv://thephonebook:${password}@cluster0.1uzb3.mongodb.net/phonebookDB?retryWrites=true&w=majority`
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+
+
 // Ask user to input 3 args: password, name, number
 if (process.argv.length < 5 && process.argv.length > 3) {
     console.log(`Please provide more arguments. You are missing either the password, the name or the phone number: node mongo.js <password> <name> <number>`)
     process.exit(1)
 } else if (process.argv.length === 3) {
-    // Get args from user
-    const password = process.argv[2]
-
-    const url =
-        `mongodb+srv://thephonebook:${password}@cluster0.1uzb3.mongodb.net/phonebookDB?retryWrites=true&w=majority`
-
-    mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+    console.log('phonebook:')
 
     Person.find({}).then(result => {
         result.forEach(person => {
-            console.log(person)
+            console.log(`${person.name} ${person.number}`)
         })
         mongoose.connection.close()
-        console.log('Connection closed')
+        // console.log('Connection closed')
     })
 } else {
-    // Get args from user
-    const password = process.argv[2]
+    // Save args from user
     const nameInput = process.argv[3]
     const numberInput = process.argv[4]
-
-    const url =
-        `mongodb+srv://thephonebook:${password}@cluster0.1uzb3.mongodb.net/phonebookDB?retryWrites=true&w=majority`
-
-    mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
-
 
     const person = new Person({
         name: nameInput,
