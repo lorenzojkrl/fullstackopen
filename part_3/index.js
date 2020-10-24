@@ -1,15 +1,30 @@
+require('dotenv').config()
 const { response } = require('express')
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
-
 const cors = require('cors')
+const mongoose = require('mongoose')
+const Person = require('./models/person')
+
+// Hard coded into.env, then.gitignore.env
+// const password = process.argv[2]
+// const url =
+//     `mongodb+srv://thephonebook:${password}@cluster0.1uzb3.mongodb.net/phonebookDB?retryWrites=true&w=majority`
+
+// Moved to modules/person.js
+// mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+
+// Create personSchema Schema moved to models/person.js
+// Format the objects returned by Mongoose moved to models/person.js
+
+// const Person = mongoose.model('Person', personSchema)
 
 
 app.use(cors());
 app.use(express.static('build'))
 
-
+// Not in use anymore when MongoDB is connected
 // let persons = [
 //     {
 //         "name": "Arto Hellas",
@@ -38,9 +53,15 @@ app.use(express.json()) // remember this with api.post!!
 morgan.token("body", req => JSON.stringify(req.body));
 app.use(morgan(`:method :url :status :res[content-length] - :response-time ms :body`))
 
+// Commented out when MongoDB is connected
+// app.get('/api/persons', (req, res) => {
+//     res.json(persons)
+// })
 
-app.get('/api/persons', (req, res) => {
-    res.json(persons)
+app.get('/api/persons', (request, response) => {
+    Person.find({}).then(persons => {
+        response.json(persons)
+    })
 })
 
 app.get('/info', (req, res) => {
@@ -98,7 +119,7 @@ app.post('/api/persons', (req, res) => {
     res.json(person)
 })
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
