@@ -1,6 +1,7 @@
 import axios from 'axios'
 const baseUrl = '/api/persons'
 
+
 const getAll = () => {
     // This returns response but we only need response.data
     // return axios.get(baseUrl)

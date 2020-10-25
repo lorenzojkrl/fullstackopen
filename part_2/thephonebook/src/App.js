@@ -55,6 +55,9 @@ const App = () => {
           .catch(error => {
             setSuccess(false)
             setNotification(`Information of ${newName} has already been removed from server`)
+            setTimeout(() => {
+              setNotification('')
+            }, 3000);
           })
 
       }
@@ -69,9 +72,9 @@ const App = () => {
           setTimeout(() => {
             setNotification('')
           }, 3000);
+          console.log(`${contactObj.name} added (in .then)`)
         })
-        .catch(console.log("Failed addition"))
-
+        .catch(console.log("Failed addition (in .catch)"))
     }
 
 
@@ -80,8 +83,10 @@ const App = () => {
   const removeContact = event => {
     event.preventDefault()
     // Change to name of the contact to be deleted!
-
-    let deleteThis = persons.find(person => person.id === Number(event.target.value))
+    // Remove Number() because id is generated as a number by DB
+    // console.log(persons.find(person => person.id === event.target.value))
+    let deleteThis = persons.find(person => person.id === event.target.value)
+    // console.log(`${deleteThis.name} TO BE removed`)
 
     let delConfirmed = window.confirm(`Delete ${deleteThis.name}`)
     // console.log(delConfirmed)
