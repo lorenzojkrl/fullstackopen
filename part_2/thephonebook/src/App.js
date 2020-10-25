@@ -74,7 +74,7 @@ const App = () => {
           setTimeout(() => {
             setNotification('')
           }, 3000);
-          console.log(`${contactObj.name} added`)
+          // console.log(`${contactObj.name} added`)
         })
         .catch(err => {
           console.log("Failed addition")
