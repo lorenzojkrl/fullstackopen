@@ -50,7 +50,9 @@ const App = () => {
                   setNotification('')
                 }, 3000);
               })
-              .catch(console.log("Error, no data from server"))
+              .catch(err => {
+                console.log("Error, no data from server")
+              })
           })
           .catch(error => {
             setSuccess(false)
@@ -72,9 +74,11 @@ const App = () => {
           setTimeout(() => {
             setNotification('')
           }, 3000);
-          console.log(`${contactObj.name} added (in .then)`)
+          console.log(`${contactObj.name} added`)
         })
-        .catch(console.log("Failed addition (in .catch)"))
+        .catch(err => {
+          console.log("Failed addition")
+        })
     }
 
 
