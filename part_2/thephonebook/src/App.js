@@ -70,6 +70,7 @@ const App = () => {
           setNewName('')
           setNewNumber('')
           setPersons(persons.concat(returnedContact))
+          setSuccess(true)
           setNotification(`Added ${contactObj.name}`)
           setTimeout(() => {
             setNotification('')
@@ -77,7 +78,13 @@ const App = () => {
           // console.log(`${contactObj.name} added`)
         })
         .catch(err => {
-          console.log("Failed addition")
+          console.log(`Here: ${JSON.stringify(err.response.data)}`)
+
+          setSuccess(false)
+          setNotification(` ${JSON.stringify(err.response.data)} `)
+          setTimeout(() => {
+            setNotification('')
+          }, 3000);
         })
     }
 
