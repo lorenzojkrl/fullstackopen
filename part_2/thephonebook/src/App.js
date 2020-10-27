@@ -39,6 +39,7 @@ const App = () => {
           .update(found.id, contactObj)
           .then(returnedContact => {
             // Fetch everything from db.json again, not efficient but re-render component immediately after .update
+            // I should try to update useState index
             personsService
               .getAll() // calls axios.get passing url, , returns response.data
               .then(dbData => {
