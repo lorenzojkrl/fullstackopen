@@ -1,5 +1,3 @@
-const { TestScheduler } = require('jest')
-
 const average = require('../utils/for_testing').average
 
 describe('average', () => {
