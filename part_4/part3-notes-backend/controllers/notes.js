@@ -11,13 +11,13 @@ notesRouter.get('/', async (request, response) => {
   // })
 })
 
-notesRouter.get('/:id', async (request, response, next) => {
-  try {
-    const note = await Note.findById(request.params.id)
-    note ? response.json(note) : response.status(404).end()
-  } catch (exception) {
-    next(exception)
-  }
+notesRouter.get('/:id', async (request, response) => {
+  // try {
+  const note = await Note.findById(request.params.id)
+  note ? response.json(note) : response.status(404).end()
+  // } catch (exception) {
+  //   next(exception)
+  // }
 
   // syntax using .then
   // Note.findById(request.params.id)
@@ -31,7 +31,7 @@ notesRouter.get('/:id', async (request, response, next) => {
   //   .catch(error => next(error))
 })
 
-notesRouter.post('/', async (request, response, next) => {
+notesRouter.post('/', async (request, response) => {
   const body = request.body
 
   const note = new Note({
@@ -46,22 +46,26 @@ notesRouter.post('/', async (request, response, next) => {
   //     response.json(savedNote.toJSON())
   //   })
   //   .catch(error => next(error))
-  try {
-    const savedNote = await note.save()
-    response.json(savedNote)
-  } catch (exception) {
-    next(exception)
-  }
+
+  // try {
+  const savedNote = await note.save()
+  response.json(savedNote)
+  // } catch (exception) {
+  //   next(exception)
+  // }
 })
 
-notesRouter.delete('/:id', async (request, response, next) => {
+notesRouter.delete('/:id', async (request, response) => {
+  // After installing & calling express-async-errors
+  // remove all try-catch and next!
+  // try {
+  await Note.findByIdAndRemove(request.params.id)
+  response.status(204).end()
+  // } catch (exception) {
+  //   next(exception)
+  // }
+
   // Using promise .then
-  try {
-    await Note.findByIdAndRemove(request.params.id)
-    response.status(204).end()
-  } catch (exception) {
-    next(exception)
-  }
   // Note.findByIdAndRemove(request.params.id)
   //   .then(() => {
   //     response.status(204).end()
