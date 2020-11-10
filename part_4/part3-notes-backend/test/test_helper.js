@@ -27,6 +27,7 @@ const notesInDb = async () => {
     return notes.map(note => note.toJSON())
 }
 
+// verify the state of the database after a user is created
 const usersInDb = async () => {
     const users = await User.find({})
     return users.map(u => u.toJSON())
