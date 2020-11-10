@@ -1,7 +1,18 @@
 const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator');
+
+`
+We could also implement other validations into the user creation. 
+We could check that the username is long enough, 
+that the username only consists of permitted characters, 
+or that the password is strong enough.
+`
 
 const userSchema = new mongoose.Schema({
-    username: String,
+    username: {
+        type: String,
+        unique: true
+    },
     name: String,
     passwordHash: String,
     notes: [
@@ -11,6 +22,8 @@ const userSchema = new mongoose.Schema({
         }
     ],
 })
+
+userSchema.plugin(uniqueValidator)
 
 userSchema.set('toJSON', {
     transform: (document, returnedObject) => {
