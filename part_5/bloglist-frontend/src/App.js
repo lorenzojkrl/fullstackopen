@@ -4,13 +4,13 @@ import blogService from './services/blogs'
 import Footer from './components/Footer'
 import Notification from './components/Notification'
 import loginService from './services/login'
+import BlogForm from './components/BlogForm'
 
 const App = () => {
-  const [newBlog, setNewBlog] = useState('')
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [notificationMsg, setNotificationMsg] = useState(null)
   const [user, setUser] = useState(null)
 
 
@@ -29,27 +29,6 @@ const App = () => {
     }
   }, [])
 
-  const addBlog = (event) => {
-    event.preventDefault()
-    const noteObject = {
-      content: newBlog,
-      date: new Date().toISOString(),
-      important: Math.random() > 0.5,
-      id: blogs.length + 1,
-    }
-
-    blogService
-      .create(noteObject)
-      .then(returnedNote => {
-        setBlogs(blogs.concat(returnedNote))
-        setNewBlog('')
-      })
-  }
-
-  const handleBlogChange = (event) => {
-    setNewBlog(event.target.value)
-  }
-
   const handleLogin = async (event) => {
     event.preventDefault()
     console.log('logging in with', username, password)
@@ -65,9 +44,9 @@ const App = () => {
       setPassword('')
       console.log(user)
     } catch (exception) {
-      setErrorMessage('Wrong credentials')
+      setNotificationMsg('Wrong credentials')
       setTimeout(() => {
-        setErrorMessage(null)
+        setNotificationMsg(null)
       }, 5000)
     }
   }
@@ -96,37 +75,6 @@ const App = () => {
     </form>
   )
 
-  const blogForm = () => (
-    <form onSubmit={addBlog}>
-      <h2>Create New Blog</h2>
-      <label>
-        Title:
-        <input
-          name='title'
-          value={newBlog}
-          onChange={handleBlogChange}
-        />
-      </label>
-      <label>
-        Author:
-        <input
-          name='author'
-          value={newBlog}
-          onChange={handleBlogChange}
-        />
-      </label>
-      <label>
-        Url:
-        <input
-          name='url'
-          value={newBlog}
-          onChange={handleBlogChange}
-        />
-      </label>
-      <button type="submit">Create</button>
-    </form>
-  )
-
   const logoutFunction = () => {
     // window.localStorage.removeItem('loggedBlogAppUser')
     window.localStorage.clear()
@@ -137,7 +85,7 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      <Notification message={errorMessage} />
+      <Notification message={notificationMsg} />
 
       {
         user === null
@@ -148,12 +96,16 @@ const App = () => {
           : <div>
             <p>{user.username} logged-in</p>
             <button onClick={logoutFunction}> log out</button>
+            <BlogForm
+              blogs={blogs}
+              setBlogs={setBlogs}
+              setNotificationMsg={setNotificationMsg}
+            />
             <h2>Blogs</h2>
-
             {blogs.map(blog =>
               <Blog key={blog.id} blog={blog} />
             )}
-            {blogForm()}
+
 
           </div>
       }
