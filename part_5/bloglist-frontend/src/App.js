@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
-import Notification from './components/Notification';
-import Footer from './components/Footer';
+import Footer from './components/Footer'
+import Notification from './components/Notification'
 import loginService from './services/login'
 
 const App = () => {
-  const [newBlog, setNewBlog] = useState('') // newNote, setNewBlog
+  const [newBlog, setNewBlog] = useState('')
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
   const [user, setUser] = useState(null)
+
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -95,13 +96,34 @@ const App = () => {
     </form>
   )
 
-  const noteForm = () => (
+  const blogForm = () => (
     <form onSubmit={addBlog}>
-      <input
-        value={newBlog}
-        onChange={handleBlogChange}
-      />
-      <button type="submit">save</button>
+      <h2>Create New Blog</h2>
+      <label>
+        Title:
+        <input
+          name='title'
+          value={newBlog}
+          onChange={handleBlogChange}
+        />
+      </label>
+      <label>
+        Author:
+        <input
+          name='author'
+          value={newBlog}
+          onChange={handleBlogChange}
+        />
+      </label>
+      <label>
+        Url:
+        <input
+          name='url'
+          value={newBlog}
+          onChange={handleBlogChange}
+        />
+      </label>
+      <button type="submit">Create</button>
     </form>
   )
 
@@ -111,9 +133,10 @@ const App = () => {
     setUser(null)
   }
 
+
   return (
     <div>
-      <h1>Blogs</h1>
+      <h2>blogs</h2>
       <Notification message={errorMessage} />
 
       {
@@ -130,11 +153,10 @@ const App = () => {
             {blogs.map(blog =>
               <Blog key={blog.id} blog={blog} />
             )}
-            {noteForm()}
+            {blogForm()}
+
           </div>
       }
-
-
 
       <Footer />
     </div>
