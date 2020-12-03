@@ -3,8 +3,8 @@ import Blog from './components/Blog'
 import blogService from './services/blogs'
 import Footer from './components/Footer'
 import Notification from './components/Notification'
-import loginService from './services/login'
 import BlogForm from './components/BlogForm'
+import LogInForm from './components/LogInForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -12,7 +12,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [notificationMsg, setNotificationMsg] = useState(null)
   const [user, setUser] = useState(null)
-
+  const [blogFormVisible, setBlogFormVisible] = useState(false)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -29,58 +29,11 @@ const App = () => {
     }
   }, [])
 
-  const handleLogin = async (event) => {
-    event.preventDefault()
-    console.log('logging in with', username, password)
-
-    try {
-      const user = await loginService.login({
-        username, password,
-      })
-      window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
-      blogService.setToken(user.token)
-      setUser(user)
-      setUsername('')
-      setPassword('')
-      console.log(user)
-    } catch (exception) {
-      setNotificationMsg('Wrong credentials')
-      setTimeout(() => {
-        setNotificationMsg(null)
-      }, 5000)
-    }
-  }
-
-  const loginForm = () => (
-    <form onSubmit={handleLogin}>
-      <div>
-        username
-          <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
-      </div>
-      <div>
-        password
-          <input
-          type="password"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
-      </div>
-      <button type="submit">login</button>
-    </form>
-  )
-
   const logoutFunction = () => {
     // window.localStorage.removeItem('loggedBlogAppUser')
     window.localStorage.clear()
     setUser(null)
   }
-
 
   return (
     <div>
@@ -91,15 +44,24 @@ const App = () => {
         user === null
           ? <div>
             <p>Log in</p>
-            {loginForm()}
+            <LogInForm
+              username={username}
+              setUsername={setUsername}
+              password={password}
+              setPassword={setPassword}
+              setUser={setUser}
+              setNotificationMsg={setNotificationMsg}
+            />
           </div>
           : <div>
             <p>{user.username} logged-in</p>
-            <button onClick={logoutFunction}> log out</button>
+            <button onClick={logoutFunction}> log out</button> <br />
             <BlogForm
               blogs={blogs}
               setBlogs={setBlogs}
               setNotificationMsg={setNotificationMsg}
+              setBlogFormVisible={setBlogFormVisible}
+              blogFormVisible={blogFormVisible}
             />
             <h2>Blogs</h2>
             {blogs.map(blog =>
@@ -111,7 +73,7 @@ const App = () => {
       }
 
       <Footer />
-    </div>
+    </div >
   )
 }
 
