@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import Footer from './components/Footer'
 import Notification from './components/Notification'
 import BlogForm from './components/BlogForm'
 import LogInForm from './components/LogInForm'
+import Togglable from './components/Togglable'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -12,7 +13,8 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [notificationMsg, setNotificationMsg] = useState(null)
   const [user, setUser] = useState(null)
-  const [blogFormVisible, setBlogFormVisible] = useState(false)
+
+  const blogFormRef = useRef()
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -35,6 +37,43 @@ const App = () => {
     setUser(null)
   }
 
+  const loginForm = () => {
+    return (
+      <Togglable buttonLabel='login' >
+        <LogInForm
+          username={username}
+          setUsername={setUsername}
+          password={password}
+          setPassword={setPassword}
+          setUser={setUser}
+          setNotificationMsg={setNotificationMsg}
+        />
+      </Togglable>
+    )
+  }
+
+  const addBlog = (blogObject) => {
+    blogFormRef.current.toggleVisibility()
+
+    console.log(blogObject);
+    blogService
+      .create(blogObject)
+      .then(returnedBlog => {
+        setBlogs(blogs.concat(returnedBlog))
+      })
+  }
+
+  const blogForm = () => {
+    return (
+      <Togglable buttonLabel="New Blog" ref={blogFormRef}>
+        <BlogForm
+          setNotificationMsg={setNotificationMsg}
+          createBlogFunc={addBlog}
+        />
+      </Togglable>
+    )
+  }
+
   return (
     <div>
       <h2>blogs</h2>
@@ -42,27 +81,10 @@ const App = () => {
 
       {
         user === null
-          ? <div>
-            <p>Log in</p>
-            <LogInForm
-              username={username}
-              setUsername={setUsername}
-              password={password}
-              setPassword={setPassword}
-              setUser={setUser}
-              setNotificationMsg={setNotificationMsg}
-            />
-          </div>
+          ? loginForm()
           : <div>
-            <p>{user.username} logged-in</p>
-            <button onClick={logoutFunction}> log out</button> <br />
-            <BlogForm
-              blogs={blogs}
-              setBlogs={setBlogs}
-              setNotificationMsg={setNotificationMsg}
-              setBlogFormVisible={setBlogFormVisible}
-              blogFormVisible={blogFormVisible}
-            />
+            <p>{user.username} logged-in</p><button onClick={logoutFunction}> log out</button>
+            {blogForm()}
             <h2>Blogs</h2>
             {blogs.map(blog =>
               <Blog key={blog.id} blog={blog} />
@@ -73,7 +95,7 @@ const App = () => {
       }
 
       <Footer />
-    </div >
+    </div>
   )
 }
 
