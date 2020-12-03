@@ -22,7 +22,6 @@ const BlogForm = ({ createBlogFunc, setNotificationMsg }) => {
       title: newTitle,
       author: newAuthor,
       url: newUrl,
-      date: new Date().toISOString(),
     })
 
     setNotificationMsg(`A new blog: ${newTitle}`)
