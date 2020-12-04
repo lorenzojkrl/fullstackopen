@@ -72,6 +72,7 @@ const App = () => {
             if (b.id === returnedBlog.id) {
               originals[i] = returnedBlog
             }
+            return originals
           })
           setBlogs(originals)
         })
