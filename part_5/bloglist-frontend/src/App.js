@@ -62,7 +62,14 @@ const App = () => {
       })
   }
 
-  const updateBlog = async (blogObject) => {
+  const updateBlog = async (blog) => {
+    let blogObject = {
+      user: blog.id,
+      likes: blog.likes + 1,
+      title: blog.title,
+      author: blog.author,
+      url: blog.url,
+    }
     try {
       await blogService
         .update(blogObject)
@@ -138,7 +145,7 @@ const App = () => {
                 <Blog
                   key={blog.id}
                   blog={blog}
-                  updateBlog={updateBlog}
+                  updateBlog={() => updateBlog(blog)}
                   removeBlog={removeBlog}
                 />
               )}

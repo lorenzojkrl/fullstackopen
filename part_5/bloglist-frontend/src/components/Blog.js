@@ -11,16 +11,6 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
 
   const viewMoreBtn = blog => {
 
-    const updateLikes = (blog) => {
-      updateBlog({
-        user: blog.id,
-        likes: blog.likes + 1,
-        title: blog.title,
-        author: blog.author,
-        url: blog.url,
-      })
-    }
-
     const handleRemoveBlog = (blog) => {
       if (window.confirm(`Remove ${blog.title} ?`)) {
         removeBlog({
@@ -37,7 +27,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
       <Togglable buttonLabel='view' back='Close' className='blogDetails'>
         <div className="testUrl"><strong>Url: </strong>{blog.url}</div>
         <div className="testLikes"><strong>Likes: </strong>{blog.likes}
-          <button onClick={() => updateLikes(blog)}>Like</button>
+          <button onClick={updateBlog}>Like</button>
         </div>
         <div><strong>Author: </strong>{blog.author}</div>
         <button onClick={() => handleRemoveBlog(blog)} >Remove</button>

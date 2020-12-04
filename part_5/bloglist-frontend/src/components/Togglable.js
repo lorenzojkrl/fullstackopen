@@ -32,10 +32,10 @@ const Togglable = React.forwardRef((props, ref) => {
 })
 
 // this way around the problem, or propTypes
-// Togglable.defaultProps = {
-//     buttonLabel: 'New',
-//     back: 'Cancel'
-// }
+Togglable.defaultProps = {
+  buttonLabel: 'New',
+  back: 'Cancel'
+}
 
 Togglable.propTypes = {
   buttonLabel: PropTypes.string.isRequired
