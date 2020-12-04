@@ -3,6 +3,7 @@ import '@testing-library/jest-dom/extend-expect'
 import { render, fireEvent } from '@testing-library/react'
 import { prettyDOM } from '@testing-library/dom'
 import Blog from './Blog'
+import BlogForm from './BlogForm'
 import Togglable from './Togglable'
 
 describe('<Blog />', () => {
@@ -22,7 +23,7 @@ describe('<Blog />', () => {
 
   beforeEach(() => {
     mockHandler = jest.fn()
-    // pass blogTest
+    // pass blogTest and event handler updateBlog
     component = render(<Blog blog={blogTest} updateBlog={mockHandler} />)
   })
 
@@ -62,7 +63,6 @@ describe('<Blog />', () => {
 
     fireEvent.click(likeBtn)
     fireEvent.click(likeBtn)
-    console.log('------------------ mockHandler.mock.calls --------------------', mockHandler.mock.calls);
     expect(mockHandler.mock.calls).toHaveLength(2)
   })
 
@@ -89,3 +89,35 @@ describe('<Togglable /> ', () => {
     ).toBeDefined()
   })
 })
+
+// describe('<BlogForm />', () => {
+//   test('5.16 - calls the event handler it received as props with the right details ', () => {
+//     const createBlog = jest.fn()
+
+//     const component = render(
+//       <BlogForm createBlogFunc={createBlog} />
+//     )
+
+//     const title = component.container.querySelector('#title')
+//     const author = component.container.querySelector('#author')
+//     const url = component.container.querySelector('#url')
+//     const form = component.container.querySelector('#form')
+
+//     fireEvent.change(
+//       title, {
+//       target: { value: 'Testing of forms could be easier, they say' }
+//     },
+//       author, {
+//       target: { value: 'Joni or Mluukkai' }
+//     },
+//       url, {
+//       target: { value: 'testing_of_forms.org' }
+//     })
+
+//     fireEvent.submit(form)
+
+//     expect(createBlogFunc.mock.calls).toHaveLength(1)
+//     // expect(createBlog.mock.calls[0][0].content).toBe('Testing of forms could be easier, they say')
+
+//   })
+// })
