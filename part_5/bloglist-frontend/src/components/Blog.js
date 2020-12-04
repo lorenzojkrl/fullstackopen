@@ -1,7 +1,7 @@
 import React from 'react'
 import Togglable from './Togglable'
 
-const Blog = ({ blog, updateBlog }) => {
+const Blog = ({ blog, updateBlog, removeBlog }) => {
   const styles = {
     blogContainer: {
       // border: '1px solid black',
@@ -21,6 +21,18 @@ const Blog = ({ blog, updateBlog }) => {
       })
     }
 
+    const handleRemoveBlog = (blog) => {
+      if (window.confirm(`Remove ${blog.title} ?`)) {
+        removeBlog({
+          user: blog.id,
+          likes: blog.likes + 1,
+          title: blog.title,
+          author: blog.author,
+          url: blog.url,
+        })
+      }
+
+    }
     return (
       <Togglable buttonLabel='view' back='Close'>
         <div><strong>Url: </strong>{blog.url}</div>
@@ -30,6 +42,7 @@ const Blog = ({ blog, updateBlog }) => {
           </button>
         </div>
         <div><strong>Author: </strong>{blog.author}</div>
+        <button onClick={() => handleRemoveBlog(blog)} >Remove</button>
       </Togglable>
     )
   }

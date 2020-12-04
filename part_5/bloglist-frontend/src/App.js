@@ -62,18 +62,44 @@ const App = () => {
       })
   }
 
-  const updateBlog = (blogObject) => {
-    blogService
-      .update(blogObject)
-      .then(returnedBlog => {
-        let originals = [...blogs]
-        blogs.map((b, i) => {
-          if (b.id === returnedBlog.id) {
-            originals[i] = returnedBlog
-          }
+  const updateBlog = async (blogObject) => {
+    try {
+      await blogService
+        .update(blogObject)
+        .then(returnedBlog => {
+          let originals = [...blogs]
+          blogs.map((b, i) => {
+            if (b.id === returnedBlog.id) {
+              originals[i] = returnedBlog
+            }
+          })
+          setBlogs(originals)
         })
-        setBlogs(originals)
-      })
+    } catch (e) {
+      setNotificationMsg(`Error: ${e}`)
+      setTimeout(() => {
+        setNotificationMsg(null)
+      }, 3000)
+    }
+  }
+
+  const removeBlog = async (blogObject) => {
+    try {
+      await blogService
+        .remove(blogObject)
+      setBlogs(blogs.filter(it => it.id !== blogObject.user))
+      setNotificationMsg(`Canceled: ${blogObject.title}`)
+      setTimeout(() => {
+        setNotificationMsg(null)
+      }, 3000)
+    } catch (e) {
+      setNotificationMsg(`Something went wrong while deleting: ${blogObject.title}. Error: ${e}`)
+      setTimeout(() => {
+        setNotificationMsg(null)
+      }, 3000)
+      const originBlogs = await blogService.getAll()
+      setBlogs(originBlogs)
+    }
   }
 
   const blogForm = () => {
@@ -112,6 +138,7 @@ const App = () => {
                   key={blog.id}
                   blog={blog}
                   updateBlog={updateBlog}
+                  removeBlog={removeBlog}
                 />
               )}
 

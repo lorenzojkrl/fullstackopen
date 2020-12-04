@@ -26,11 +26,21 @@ const update = async newObject => {
   const config = {
     headers: { Authorization: token },
   }
-  console.log(newObject.user)
+  // console.log(newObject.user)
   let updateUrl = baseUrl + `/${newObject.user}`
   const response = await axios.put(updateUrl, newObject, config)
   return response.data
 }
 
+const remove = async ObjectTarget => {
+  const config = {
+    headers: { Authorization: token },
+  }
 
-export default { getAll, create, setToken, update }
+  let updateUrl = baseUrl + `/${ObjectTarget.user}`
+  const response = await axios.delete(updateUrl, config)
+  return response.data
+}
+
+
+export default { getAll, create, setToken, update, remove }
