@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 const BlogForm = ({ createBlogFunc, setNotificationMsg }) => {
 
@@ -41,7 +41,7 @@ const BlogForm = ({ createBlogFunc, setNotificationMsg }) => {
         <form onSubmit={addBlog}>
           <label>
             Title:
-                <input
+            <input
               name='title'
               value={newTitle}
               onChange={e => setNewTitle(e.target.value)}
@@ -49,7 +49,7 @@ const BlogForm = ({ createBlogFunc, setNotificationMsg }) => {
           </label><br />
           <label>
             Author:
-                <input
+            <input
               name='author'
               value={newAuthor}
               onChange={e => setNewAuthor(e.target.value)}
@@ -57,7 +57,7 @@ const BlogForm = ({ createBlogFunc, setNotificationMsg }) => {
           </label><br />
           <label>
             Url:
-                <input
+            <input
               name='url'
               value={newUrl}
               onChange={e => setNewUrl(e.target.value)}
@@ -68,7 +68,7 @@ const BlogForm = ({ createBlogFunc, setNotificationMsg }) => {
       </div>
 
     </div>
-  );
-};
+  )
+}
 
-export default BlogForm;
+export default BlogForm
