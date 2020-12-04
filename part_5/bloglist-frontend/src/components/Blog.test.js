@@ -23,7 +23,7 @@ describe('<Blog />', () => {
   beforeEach(() => {
     mockHandler = jest.fn()
     // pass blogTest
-    component = render(<Blog blog={blogTest} updateLikes={mockHandler} />)
+    component = render(<Blog blog={blogTest} updateBlog={mockHandler} />)
   })
 
   test('5.13 - renders only title and author by default ', () => {

@@ -21,8 +21,8 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
           url: blog.url,
         })
       }
-
     }
+
     return (
       <Togglable buttonLabel='view' back='Close' className='blogDetails'>
         <div className="testUrl"><strong>Url: </strong>{blog.url}</div>
