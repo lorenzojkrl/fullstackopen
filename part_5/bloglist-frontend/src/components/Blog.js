@@ -34,7 +34,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
 
     }
     return (
-      <Togglable buttonLabel='view' back='Close'>
+      <Togglable buttonLabel='view' back='Close' className='blogDetails'>
         <div><strong>Url: </strong>{blog.url}</div>
         <div><strong>Likes: </strong>{blog.likes}
           <button onClick={() => updateLikes(blog)}>
@@ -48,7 +48,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
   }
 
   return (
-    <div style={styles.blogContainer}>
+    <div style={styles.blogContainer} className='blogNoDetails'>
       {blog.title} by {blog.author}
       {viewMoreBtn(blog)}
     </div>
