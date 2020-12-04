@@ -91,22 +91,29 @@ const App = () => {
     <div>
       <h2>blogs</h2>
       <Notification message={notificationMsg} />
-
       {
         user === null
           ? loginForm()
           : <div>
-            <p>{user.username} logged-in</p><button onClick={logoutFunction}> log out</button>
+            <p>
+              {user.username} logged-in
+              <button onClick={logoutFunction}>
+                log out
+              </button>
+            </p>
             {blogForm()}
             <h2>Blogs</h2>
-            {blogs.map(blog =>
-              <Blog
-                key={blog.id}
-                blog={blog}
-                updateBlog={updateBlog}
-              />
-            )}
-
+            {blogs
+              .sort((a, b) => {
+                return parseFloat(b.likes) - parseFloat(a.likes)
+              })
+              .map(blog =>
+                <Blog
+                  key={blog.id}
+                  blog={blog}
+                  updateBlog={updateBlog}
+                />
+              )}
 
           </div>
       }
