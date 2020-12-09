@@ -149,7 +149,6 @@ const App = () => {
                   removeBlog={removeBlog}
                 />
               )}
-
           </div>
       }
 
