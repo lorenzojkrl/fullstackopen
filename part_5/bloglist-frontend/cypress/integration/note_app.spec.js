@@ -11,7 +11,7 @@ describe('Blog app', function () {
 
     it('user can login', function () {
         cy.contains('login').click()
-        cy.get('input:first').type('mluukkai')
-        cy.get('input:last').type('salainen')
+        cy.get('input:first').type('root')
+        cy.get('input:last').type('sekret')
     })
 })
