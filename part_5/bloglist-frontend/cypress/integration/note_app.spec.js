@@ -43,7 +43,7 @@ describe('In blog app', function () {
             cy.get('#login-btn').click()
         })
 
-        it.only('a new blog can be created', function () {
+        it('a new blog can be created', function () {
             cy.contains('New Blog').click()
             cy.get('#title').type('A blog created by cypress')
             cy.get('#author').type('cypress')
@@ -53,6 +53,26 @@ describe('In blog app', function () {
             // The following content appears only in the blog added to the list of blogs
             // therefore, a new blog is added to the list of all blogs.
             cy.contains('A blog created by cypress by cypress')
+        })
+    })
+
+    describe.only('when logged in & a blog exists', function () {
+        beforeEach(function () {
+            cy.contains('login').click()
+            cy.get('#username').type('lorenzozar')
+            cy.get('#password').type('password')
+            cy.get('#login-btn').click()
+            cy.contains('New Blog').click()
+            cy.get('#title').type('A blog created by cypress')
+            cy.get('#author').type('cypress')
+            cy.get('#url').type('https://docs.cypress.io/guides/')
+            cy.contains('Create Blog').click()
+        })
+
+        it('the user can like a blog', function () {
+            cy.contains('view').click()
+            cy.contains('Like ').click()
+            cy.get('html').should('contain', 'Likes: 1')
         })
     })
 })

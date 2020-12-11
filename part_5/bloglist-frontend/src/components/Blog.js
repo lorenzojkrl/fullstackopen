@@ -27,7 +27,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
       <Togglable buttonLabel='view' back='Close' className='blogDetails'>
         <div className="testUrl"><strong>Url: </strong>{blog.url}</div>
         <div className="testLikes"><strong>Likes: </strong>{blog.likes}
-          <button onClick={updateBlog}>Like</button>
+          <button onClick={updateBlog}>Like </button>
         </div>
         <div><strong>Author: </strong>{blog.author}</div>
         <button onClick={() => handleRemoveBlog(blog)} >Remove</button>
