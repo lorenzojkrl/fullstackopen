@@ -56,7 +56,7 @@ describe('In blog app', function () {
         })
     })
 
-    describe.only('when logged in & a blog exists', function () {
+    describe('when logged in & a blog exists', function () {
         beforeEach(function () {
             cy.contains('login').click()
             cy.get('#username').type('lorenzozar')
@@ -72,7 +72,29 @@ describe('In blog app', function () {
         it('the user can like a blog', function () {
             cy.contains('view').click()
             cy.contains('Like ').click()
+
             cy.get('html').should('contain', 'Likes: 1')
+        })
+    })
+
+    describe.only('when logged in', function () {
+        beforeEach(function () {
+            cy.contains('login').click()
+            cy.get('#username').type('lorenzozar')
+            cy.get('#password').type('password')
+            cy.get('#login-btn').click()
+            cy.contains('New Blog').click()
+            cy.get('#title').type('A blog created by cypress')
+            cy.get('#author').type('cypress')
+            cy.get('#url').type('https://docs.cypress.io/guides/')
+            cy.contains('Create Blog').click()
+        })
+
+        it('a user can delete his blog', function () {
+            cy.contains('view').click()
+            cy.contains('Remove ').click()
+
+            cy.get('html').should('not.contain', 'A blog created by cypress')
         })
     })
 })

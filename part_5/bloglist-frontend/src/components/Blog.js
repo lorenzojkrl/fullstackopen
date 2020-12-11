@@ -30,7 +30,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
           <button onClick={updateBlog}>Like </button>
         </div>
         <div><strong>Author: </strong>{blog.author}</div>
-        <button onClick={() => handleRemoveBlog(blog)} >Remove</button>
+        <button onClick={() => handleRemoveBlog(blog)} >Remove </button>
       </Togglable>
     )
   }
