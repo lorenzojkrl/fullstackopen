@@ -35,27 +35,29 @@ describe('In blog app', function () {
         })
     })
 
+    describe('when logged in', function () {
+        beforeEach(function () {
+            cy.contains('login').click()
+            cy.get('#username').type('lorenzozar')
+            cy.get('#password').type('password')
+            cy.get('#login-btn').click()
+        })
+
+        it.only('a new blog can be created', function () {
+            cy.contains('New Blog').click()
+            cy.get('#title').type('A blog created by cypress')
+            cy.get('#author').type('cypress')
+            cy.get('#url').type('https://docs.cypress.io/guides/')
+
+            cy.contains('Create Blog').click()
+            // The following content appears only in the blog added to the list of blogs
+            // therefore, a new blog is added to the list of all blogs.
+            cy.contains('A blog created by cypress by cypress')
+        })
+    })
 })
 
-// describe('Blog app', function () {
-//     beforeEach(function () {
-//         cy.visit('http://localhost:3000')
-//         cy.contains('login').click()
-//         cy.get('#username').type('root')
-//         cy.get('#password').type('sekret')
-//         cy.get('#login-btn').click()
-//     })
 
-//     it('a new blog can be created', function () {
-//         cy.contains('New Blog').click()
-//         cy.get('#title').type('A blog created by cypress')
-//         cy.get('#author').type('cypress')
-//         cy.get('#url').type('https://docs.cypress.io/guides/')
-
-//         cy.contains('Create').click()
-//         cy.contains('A blog created by cypress')
-//     })
-// })
 
 
 

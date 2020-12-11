@@ -69,7 +69,7 @@ const BlogForm = ({ createBlogFunc, setNotificationMsg }) => {
           <button
             type="submit"
             id="create"
-          >Create</button>
+          >Create Blog</button>
         </form>
       </div>
 
