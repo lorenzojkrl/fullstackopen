@@ -77,7 +77,7 @@ describe('In blog app', function () {
         })
     })
 
-    describe.only('when logged in', function () {
+    describe('when logged in', function () {
         beforeEach(function () {
             cy.contains('login').click()
             cy.get('#username').type('lorenzozar')
@@ -97,6 +97,19 @@ describe('In blog app', function () {
             cy.get('html').should('not.contain', 'A blog created by cypress')
         })
     })
+
+    // describe.only('blogs are ordered according to likes', function () {
+    //     beforeEach(function () {
+    //         cy.contains('login').click()
+    //         cy.get('#username').type('lorenzozar')
+    //         cy.get('#password').type('password')
+    //         cy.get('#login-btn').click()
+    //     })
+
+    //     it('with the blog with the most likes being first.', function () {
+
+    //     })
+    // })
 })
 
 
