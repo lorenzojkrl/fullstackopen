@@ -25,7 +25,7 @@ const blogSchema = new mongoose.Schema({
     url: {
         type: String,
         required: true,
-        minlength: 6
+        // minlength: 6
     },
     likes: Number,
     user: {
