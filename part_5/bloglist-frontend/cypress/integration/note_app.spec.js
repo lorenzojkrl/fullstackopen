@@ -98,23 +98,45 @@ describe('In blog app', function () {
         })
     })
 
-    // describe.only('blogs are ordered according to likes', function () {
-    //     beforeEach(function () {
-    //         cy.contains('login').click()
-    //         cy.get('#username').type('lorenzozar')
-    //         cy.get('#password').type('password')
-    //         cy.get('#login-btn').click()
-    //     })
+    describe.only('blogs are ordered according to likes', function () {
+        beforeEach(function () {
+            cy.contains('login').click()
+            cy.get('#username').type('lorenzozar')
+            cy.get('#password').type('password')
+            cy.get('#login-btn').click()
 
-    //     it('with the blog with the most likes being first.', function () {
+            cy.contains('New Blog').click()
+            cy.get('#title').type('A blog created by cypress')
+            cy.get('#author').type('cypress1')
+            cy.get('#url').type('https://docs.cypress.io/guides/')
+            cy.contains('Create Blog').click()
 
-    //     })
-    // })
+
+            cy.contains('New Blog').click()
+            cy.get('#title').type('A Second blog created by cypress')
+            cy.get('#author').type('cypress2')
+            cy.get('#url').type('https://docs.cypress.io/guides/')
+            cy.contains('Create Blog').click()
+
+            cy.contains('New Blog').click()
+            cy.get('#title').type('A Third blog created by cypress')
+            cy.get('#author').type('cypress3')
+            cy.get('#url').type('https://docs.cypress.io/guides/')
+            cy.contains('Create Blog').click()
+        })
+
+        it('with the blog with the most likes being first.', function () {
+
+            cy.get('button').then(buttons => {
+                console.log('number of buttons', buttons.length)
+                cy.wrap(buttons[8]).click()
+                cy.wrap(buttons[9]).click()
+            })
+
+            cy.contains('blog created by cypress').parent().contains('cypress2')
+        })
+    })
 })
-
-
-
-
 
 // In case of linting errors
 // npm install eslint-plugin-cypress --save-dev
