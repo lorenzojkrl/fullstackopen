@@ -98,6 +98,8 @@ describe('In blog app', function () {
         })
     })
 
+    // Refactor everything following https://fullstackopen.com/en/part5/end_to_end_testing#bypassing-the-ui
+
     describe.only('blogs are ordered according to likes', function () {
         beforeEach(function () {
             cy.contains('login').click()
