@@ -23,7 +23,28 @@ const reducer = (state = initialState, action) => {
   console.log('state now: ', state)
   console.log('action', action)
 
-  return state
+  switch (action.type) {
+    case 'ADD_ONE_VOTE':
+      const id = action.data.id
+      const votedAnecdote = state.find(n => n.id === id)
+      votedAnecdote.votes += 1
+
+      return state.map(a =>
+        a.id !== id ? a : votedAnecdote
+      )
+
+    default:
+      return state
+  }
+}
+
+// Functions that create actions: action creators
+export const voteAnecdote = (id) => {
+  // alert(`in vote action creator with id ${id}`)
+  return {
+    type: 'ADD_ONE_VOTE',
+    data: { id }
+  }
 }
 
 export default reducer
