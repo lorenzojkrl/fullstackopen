@@ -32,6 +32,12 @@ const reducer = (state = initialState, action) => {
       return state.map(a =>
         a.id !== id ? a : votedAnecdote
       )
+    case 'CREATE_ANECDOTE':
+      const content = action.data.content
+      let newAnecdote = asObject(content)
+      console.log('newAnecdote in reducer: ', newAnecdote);
+
+      return state.concat(newAnecdote)
 
     default:
       return state
@@ -44,6 +50,14 @@ export const voteAnecdote = (id) => {
   return {
     type: 'ADD_ONE_VOTE',
     data: { id }
+  }
+}
+
+export const createAnecdote = (content) => {
+  // alert(`in vote action creator with id ${id}`)
+  return {
+    type: 'CREATE_ANECDOTE',
+    data: { content }
   }
 }
 
