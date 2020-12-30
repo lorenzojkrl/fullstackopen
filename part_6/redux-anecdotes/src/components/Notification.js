@@ -1,18 +1,31 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleNotification } from '../reducers/notificationReducer'
 
 const Notification = () => {
-  const notification = useSelector(/* something here */)
+  const notification = useSelector(state => state.notification)
+  const dispatch = useDispatch()
+
   const style = {
     border: 'solid',
     padding: 10,
-    borderWidth: 1
+    borderWidth: 1,
+    margin: '1vh',
   }
-  return (
-    <div style={style}>
-      {notification}
-    </div>
-  )
+
+  const close = () => {
+    setTimeout(() => { dispatch(toggleNotification(false)) }, 5000)
+  }
+
+  return notification
+    ? <>
+      <div style={style}> {notification} </div>
+      {close()}
+    </>
+    : <></>
+
+
+
 }
 
 export default Notification

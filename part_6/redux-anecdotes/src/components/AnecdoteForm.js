@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux'
 
 import { createAnecdote } from '../reducers/anecdoteReducer'
+import { toggleNotification } from "../reducers/notificationReducer";
 
 const AnecdoteForm = () => {
     const dispatch = useDispatch()
@@ -10,6 +11,7 @@ const AnecdoteForm = () => {
         event.preventDefault()
         const content = event.target.newAnecdote.value
         dispatch(createAnecdote(content))
+        dispatch(toggleNotification(content))
     }
 
     return (
