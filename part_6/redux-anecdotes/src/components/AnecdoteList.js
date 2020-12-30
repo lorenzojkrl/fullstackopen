@@ -2,9 +2,21 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { voteAnecdote } from '../reducers/anecdoteReducer'
 import { toggleNotification } from '../reducers/notificationReducer'
+import Anecdote from './Anecdote'
 
 const AnecdoteList = () => {
-  const anecdotes = useSelector(state => state.anecdotes)
+  const anecdotes = useSelector(state => {
+    if (state.filterReducer === '') {
+      return state.anecdotes
+    }
+
+    let filteredAnecdotes = state.anecdotes.filter(anecdote => {
+      return anecdote.content.includes(state.filterReducer)
+    })
+
+    return filteredAnecdotes
+  })
+
   // console.log(state)
   // The component can access the anexdotes stored in the store 
   // with the useSelector-hook of the react-redux library.
@@ -22,17 +34,15 @@ const AnecdoteList = () => {
   return (
     <div>
       {
-        anecdotes.sort((a, b) => (a.votes > b.votes) ? -1 : 1).map(anecdote =>
-          <div key={anecdote.id}>
-            <div>
-              {anecdote.content}
-            </div>
-            <div>
-              has {anecdote.votes}
-              <button onClick={() => vote(anecdote)}>vote</button>
-            </div>
-          </div>
-        )
+        anecdotes
+          .sort((a, b) => (a.votes > b.votes) ? -1 : 1)
+          .map(anecdote =>
+            <Anecdote
+              key={anecdote.id}
+              anecdote={anecdote}
+              vote={vote}
+            />
+          )
       }
     </div>
   );

@@ -1,8 +1,8 @@
 const initialNotification = false
 
 const notificationReducer = (state = initialNotification, action) => {
-    console.log('notificationReducer state now notR: ', state)
-    console.log('notificationReducer action notR', action)
+    // console.log('notificationReducer state now notR: ', state)
+    // console.log('notificationReducer action notR', action)
 
     switch (action.type) {
         case 'SHOW_NOTIFICATION':
