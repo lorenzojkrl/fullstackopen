@@ -1,8 +1,8 @@
 const initialFilter = ''
 
 const filterReducer = (state = initialFilter, action) => {
-  console.log('filterReducer state: ', state)
-  console.log('filterReducer action', action)
+  // console.log('filterReducer state: ', state)
+  // console.log('filterReducer action', action)
 
 
   switch (action.type) {
