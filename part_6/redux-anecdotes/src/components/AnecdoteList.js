@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { voteAnecdote } from '../reducers/anecdoteReducer'
 import { toggleNotification } from '../reducers/notificationReducer'
 import Anecdote from './Anecdote'
+import anecdotesService from '../services/anecdotes'
 
 const AnecdoteList = () => {
   const anecdotes = useSelector(state => {
@@ -26,8 +27,9 @@ const AnecdoteList = () => {
 
   // Use dispatch-function from the useDispatch -hook, instead of redux-store
 
-  const vote = (anecdote) => {
+  const vote = async (anecdote) => {
     dispatch(voteAnecdote(anecdote.id))
+    const anecdoteVoted = await anecdotesService.updateVote(anecdote)
     dispatch(toggleNotification(anecdote.content))
   }
 

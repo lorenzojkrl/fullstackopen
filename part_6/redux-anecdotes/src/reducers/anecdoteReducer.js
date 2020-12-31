@@ -56,11 +56,11 @@ export const voteAnecdote = (id) => {
   }
 }
 
-export const createAnecdote = (content) => {
+export const createAnecdote = (data) => {
   // alert(`in createAnecdote action creator with content`)
   return {
     type: 'CREATE_ANECDOTE',
-    data: { content }
+    data,
   }
 }
 
