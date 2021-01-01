@@ -1,10 +1,8 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { toggleNotification } from '../reducers/notificationReducer'
+import { useSelector } from 'react-redux'
 
 const Notification = () => {
   const notification = useSelector(state => state.notification)
-  const dispatch = useDispatch()
 
   const style = {
     border: 'solid',
@@ -13,15 +11,8 @@ const Notification = () => {
     margin: '1vh',
   }
 
-  // const close = () => {
-  //   setTimeout(() => { dispatch(toggleNotification(false, 2000)) }, 5000)
-  // }
-
   return notification
-    ? <>
-      <div style={style}> {notification} </div>
-      {/* {close()} */}
-    </>
+    ? <div style={style}> {notification} </div>
     : <></>
 
 
