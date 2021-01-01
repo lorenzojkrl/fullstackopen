@@ -1,3 +1,6 @@
+import anecdotesService from '../services/anecdotes'
+
+
 // From db.json
 // const anecdotesAtStart = [
 //   'If it hurts, do it more often',
@@ -64,11 +67,21 @@ export const createAnecdote = (data) => {
   }
 }
 
-export const initializeAnecdotes = (anecdotes) => {
-  return {
-    type: 'INIT_ANECDOTES',
-    data: anecdotes,
+export const initializeAnecdotes = () => {
+  return async dispatch => {
+    const anecdotes = await anecdotesService.getAll()
+    dispatch({
+      type: 'INIT_ANECDOTES',
+      data: anecdotes,
+    })
   }
 }
+
+// export const initializeAnecdotes = (anecdotes) => {
+//   return {
+//     type: 'INIT_ANECDOTES',
+//     data: anecdotes,
+//   }
+// }
 
 export default anecdoteReducer
