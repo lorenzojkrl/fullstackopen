@@ -4,8 +4,6 @@ const baseUrl = 'http://localhost:3001/anecdotes'
 
 const getAll = async () => {
     const response = await axios.get(baseUrl)
-    console.log("typeof response.data:", typeof response.data);
-    console.log('response.data:', response.data);
     return response.data
 }
 
@@ -20,7 +18,9 @@ const createNew = async (content, votes = 0) => {
 
 const updateVote = async (anecdote) => {
     let updateUrl = `${baseUrl}/${anecdote.id}`
-    const response = await axios.put(updateUrl, anecdote)
+    let voted = anecdote
+    voted.votes += 1
+    const response = await axios.put(updateUrl, voted)
     return response.data
 }
 

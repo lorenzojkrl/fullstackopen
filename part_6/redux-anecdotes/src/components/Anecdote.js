@@ -18,8 +18,3 @@ const Anecdote = ({ anecdote, vote }) => {
 };
 
 export default Anecdote;
-
-// anecdotes
-//           .sort((a, b) => (a.votes > b.votes) ? -1 : 1)
-//           .map(anecdote =>
-
