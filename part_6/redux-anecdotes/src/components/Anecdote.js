@@ -1,6 +1,9 @@
 import React from 'react';
 
 const Anecdote = ({ anecdote, vote }) => {
+    // console.log('anecdotes in Anecdote component:', anecdote);
+    // console.log(typeof (anecdote));
+
     return (
         <div key={anecdote.id}>
             <div>
@@ -15,3 +18,8 @@ const Anecdote = ({ anecdote, vote }) => {
 };
 
 export default Anecdote;
+
+// anecdotes
+//           .sort((a, b) => (a.votes > b.votes) ? -1 : 1)
+//           .map(anecdote =>
+

@@ -10,9 +10,10 @@ const AnecdoteForm = () => {
     const create = async (event) => {
         event.preventDefault()
         const content = event.target.newAnecdote.value
+        event.target.newAnecdote.value = ''
         const newAnecdote = await anecdotesService.createNew(content)
         dispatch(createAnecdote(newAnecdote))
-        dispatch(toggleNotification(content))
+        dispatch(toggleNotification(newAnecdote.content))
     }
 
     return (

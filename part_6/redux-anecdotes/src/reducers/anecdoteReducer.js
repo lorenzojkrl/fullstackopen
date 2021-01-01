@@ -1,5 +1,3 @@
-import anecdotesService from '../services/anecdotes'
-
 // From db.json
 // const anecdotesAtStart = [
 //   'If it hurts, do it more often',
@@ -62,23 +60,14 @@ export const createAnecdote = (data) => {
   // alert(`in createAnecdote action creator with content`)
   return {
     type: 'CREATE_ANECDOTE',
-    data,
+    data
   }
 }
 
-// Thanks to redux-thunk, it is possible to define action creators 
-// so that they return a function having the dispatch-method of redux-store as its parameter. 
-// As a result of this, one can make asynchronous action creators, 
-// which first wait for some operation to finish, 
-// after which they then dispatch the real action.
-
-export const initializeAnecdotes = () => {
-  return async dispatch => {
-    const anecdotes = await anecdotesService.getAll()
-    dispatch({
-      type: 'INIT_ANECDOTES',
-      data: anecdotes,
-    })
+export const initializeAnecdotes = (anecdotes) => {
+  return {
+    type: 'INIT_ANECDOTES',
+    data: anecdotes,
   }
 }
 

@@ -8,6 +8,7 @@ import anecdotesService from '../services/anecdotes'
 const AnecdoteList = () => {
   const anecdotes = useSelector(state => {
     if (state.filterReducer === '') {
+      console.log('state.anecdotes', state.anecdotes);
       return state.anecdotes
     }
 
@@ -33,6 +34,8 @@ const AnecdoteList = () => {
     dispatch(toggleNotification(anecdoteVoted.content))
   }
 
+  console.log('anecdotes in List:', anecdotes)
+
   return (
     <div>
       {
@@ -45,6 +48,7 @@ const AnecdoteList = () => {
               vote={vote}
             />
           )
+
       }
     </div>
   );
