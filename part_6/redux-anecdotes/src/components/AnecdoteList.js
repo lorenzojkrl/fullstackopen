@@ -30,7 +30,7 @@ const AnecdoteList = () => {
   const vote = async (anecdote) => {
     dispatch(voteAnecdote(anecdote.id))
     const anecdoteVoted = await anecdotesService.updateVote(anecdote)
-    dispatch(toggleNotification(anecdote.content))
+    dispatch(toggleNotification(anecdoteVoted.content))
   }
 
   return (
