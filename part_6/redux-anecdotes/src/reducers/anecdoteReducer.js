@@ -50,9 +50,11 @@ const anecdoteReducer = (state = [], action) => {
   }
 }
 
-// Functions that create actions: action creators
 export const voteAnecdote = (id) => {
-  // alert(`in vote action creator with id ${id}`)
+  // return async dispatch => {
+  //   const votedAnecdote = await
+  // }
+
   return {
     type: 'ADD_ONE_VOTE',
     data: { id }
@@ -78,12 +80,5 @@ export const initializeAnecdotes = () => {
     })
   }
 }
-
-// export const initializeAnecdotes = (anecdotes) => {
-//   return {
-//     type: 'INIT_ANECDOTES',
-//     data: anecdotes,
-//   }
-// }
 
 export default anecdoteReducer
