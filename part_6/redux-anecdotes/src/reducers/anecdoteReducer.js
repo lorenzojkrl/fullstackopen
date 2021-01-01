@@ -34,8 +34,7 @@ const anecdoteReducer = (state = [], action) => {
       return newState
 
     case 'CREATE_ANECDOTE':
-      const content = action.data.content
-      let newAnecdote = asObject(content)
+      const newAnecdote = action.data
       return state.concat(newAnecdote)
 
     case 'INIT_ANECDOTES':
