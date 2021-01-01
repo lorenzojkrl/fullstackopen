@@ -11,7 +11,7 @@ const AnecdoteForm = () => {
         const content = event.target.newAnecdote.value
         event.target.newAnecdote.value = ''
         dispatch(createAnecdote(content))
-        dispatch(toggleNotification(content))
+        dispatch(toggleNotification(`New anecdote: ${content}`, 3))
     }
 
     return (

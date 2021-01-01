@@ -1,8 +1,6 @@
 import React from 'react';
 
 const Anecdote = ({ anecdote, vote }) => {
-    // console.log('anecdotes in Anecdote component:', anecdote);
-    // console.log(typeof (anecdote));
 
     return (
         <div key={anecdote.id}>

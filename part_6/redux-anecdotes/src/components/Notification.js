@@ -13,14 +13,14 @@ const Notification = () => {
     margin: '1vh',
   }
 
-  const close = () => {
-    setTimeout(() => { dispatch(toggleNotification(false)) }, 5000)
-  }
+  // const close = () => {
+  //   setTimeout(() => { dispatch(toggleNotification(false, 2000)) }, 5000)
+  // }
 
   return notification
     ? <>
       <div style={style}> {notification} </div>
-      {close()}
+      {/* {close()} */}
     </>
     : <></>
 
