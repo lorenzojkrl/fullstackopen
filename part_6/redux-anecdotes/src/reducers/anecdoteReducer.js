@@ -60,10 +60,12 @@ export const voteAnecdote = (id) => {
 }
 
 export const createAnecdote = (data) => {
-  // alert(`in createAnecdote action creator with content`)
-  return {
-    type: 'CREATE_ANECDOTE',
-    data
+  return async dispatch => {
+    const newAnecdote = await anecdotesService.createNew(data)
+    dispatch({
+      type: 'CREATE_ANECDOTE',
+      data: newAnecdote
+    })
   }
 }
 
