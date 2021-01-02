@@ -45,6 +45,8 @@ const AnecdoteList = (props) => {
   const vote = async (anecdote) => {
     // dispatch(voteAnecdote(anecdote))
     // dispatch(toggleNotification(anecdote.content, 2))
+    props.voteAnecdote(anecdote)
+    props.toggleNotification(anecdote.content, 2)
     console.log('a voted:', anecdote);
   }
 
@@ -85,8 +87,16 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = {
+  voteAnecdote,
+  toggleNotification
+}
+
 // export default AnecdoteList;
-const ConnectedAnecdoteList = connect(mapStateToProps)(AnecdoteList)
+const ConnectedAnecdoteList = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AnecdoteList)
 export default ConnectedAnecdoteList
 
 
