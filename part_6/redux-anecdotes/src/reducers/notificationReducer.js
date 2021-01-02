@@ -6,8 +6,8 @@ const notificationReducer = (state = initialNotification, action) => {
 
     switch (action.type) {
         case 'SHOW_NOTIFICATION':
-            console.log('action.data in SHOW NOT', action.data);
-            console.log('state in SHOW NOT', state);
+            // console.log('action.data in SHOW NOT', action.data);
+            // console.log('state in SHOW NOT', state);
 
             if (state.pendingTimeoutHandler) {
                 clearTimeout(state.pendingTimeoutHandler)

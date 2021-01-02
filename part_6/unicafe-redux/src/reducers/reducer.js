@@ -5,7 +5,7 @@ const initialState = {
 }
 
 const counterReducer = (state = initialState, action) => {
-  console.log(action)
+  // console.log(action)
   const newState = {
     ...state,
   }

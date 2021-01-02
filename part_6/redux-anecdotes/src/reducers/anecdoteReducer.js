@@ -24,13 +24,13 @@ import anecdotesService from '../services/anecdotes'
 // const initialState = anecdotesAtStart.map(asObject)
 
 const anecdoteReducer = (state = [], action) => {
-  console.log('state now: ', state)
-  console.log('action', action)
+  // console.log('state now: ', state)
+  // console.log('action', action)
 
   switch (action.type) {
     case 'ADD_ONE_VOTE':
       let newState = [...state]
-      console.log('newState', newState);
+      // console.log('newState', newState);
       return newState
 
     case 'CREATE_ANECDOTE':
@@ -48,7 +48,7 @@ const anecdoteReducer = (state = [], action) => {
 export const voteAnecdote = (anecdote) => {
   return async dispatch => {
     const votedAnecdote = await anecdotesService.updateVote(anecdote)
-    console.log('votedAnecdote in voteAnecdote', votedAnecdote);
+    // console.log('votedAnecdote in voteAnecdote', votedAnecdote);
 
     dispatch({
       type: 'ADD_ONE_VOTE',
