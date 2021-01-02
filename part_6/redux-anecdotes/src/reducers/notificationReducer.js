@@ -6,7 +6,14 @@ const notificationReducer = (state = initialNotification, action) => {
 
     switch (action.type) {
         case 'SHOW_NOTIFICATION':
-            return action.data.content
+            console.log('action.data in SHOW NOT', action.data);
+            console.log('state in SHOW NOT', state);
+
+            if (state.pendingTimeoutHandler) {
+                clearTimeout(state.pendingTimeoutHandler)
+                state.pendingTimeoutHandler = false
+            }
+            return action.data
 
         case 'CLEAR':
             return false
@@ -18,12 +25,18 @@ const notificationReducer = (state = initialNotification, action) => {
 
 export const toggleNotification = (content, time) => {
     return async dispatch => {
-        setTimeout(() => {
-            dispatch(clearNotification())
-        }, time * 1000)
+
+        const newObj = {
+            content,
+            pendingTimeoutHandler: setTimeout(() => { dispatch(clearNotification()) }, time * 1000),
+        }
+
+        // setTimeout(() => {
+        //     dispatch(clearNotification())
+        // }, time * 1000)
         dispatch({
             type: 'SHOW_NOTIFICATION',
-            data: { content }
+            data: newObj
         })
     }
 }

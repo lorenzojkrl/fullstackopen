@@ -46,8 +46,7 @@ const AnecdoteList = (props) => {
     // dispatch(voteAnecdote(anecdote))
     // dispatch(toggleNotification(anecdote.content, 2))
     props.voteAnecdote(anecdote)
-    props.toggleNotification(anecdote.content, 2)
-    console.log('a voted:', anecdote);
+    props.toggleNotification(anecdote.content, 5)
   }
 
   return (
@@ -69,7 +68,6 @@ const AnecdoteList = (props) => {
 
 const mapStateToProps = (state) => {
   if (state.filter === '') {
-    console.log('state.anecdotes:', state.anecdotes)
     return {
       anecdotes: state.anecdotes,
       filterReducer: state.filterReducer,
@@ -80,7 +78,6 @@ const mapStateToProps = (state) => {
     return anecdote.content.includes(state.filterReducer)
   })
 
-  console.log('anecdotesToShow', filteredAnecdotes);
   return {
     anecdotes: filteredAnecdotes,
     filterReducer: state.filterReducer,

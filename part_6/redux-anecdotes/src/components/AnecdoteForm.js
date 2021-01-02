@@ -14,7 +14,7 @@ const AnecdoteForm = (props) => {
         // dispatch(createAnecdote(content))
         // dispatch(toggleNotification(`New anecdote: ${content}`, 3))
         props.createAnecdote(content)
-        props.toggleNotification(`New anecdote: ${content}`, 3)
+        props.toggleNotification(`New anecdote: ${content}`, 5)
     }
 
     return (
