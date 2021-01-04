@@ -4,6 +4,7 @@ import {
   Route,
   Link,
   useRouteMatch,
+  useHistory,
 } from "react-router-dom"
 
 const Menu = () => {
@@ -71,6 +72,7 @@ const CreateNew = (props) => {
   const [content, setContent] = useState('')
   const [author, setAuthor] = useState('')
   const [info, setInfo] = useState('')
+  const history = useHistory()
 
 
   const handleSubmit = (e) => {
@@ -81,6 +83,7 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
+    history.push('/')
   }
 
   return (
@@ -133,7 +136,7 @@ const App = () => {
     setNotification(`A new anecdote: ${anecdote.content}`)
     setTimeout(() => {
       setNotification('')
-    }, 1000)
+    }, 10000)
   }
 
   const anecdoteById = (id) =>
