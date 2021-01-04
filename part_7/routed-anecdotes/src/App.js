@@ -1,36 +1,35 @@
 import React, { useState } from 'react'
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  useParams,
-  useHistory,
+  useRouteMatch,
 } from "react-router-dom"
 
 const Menu = () => {
   const padding = {
     paddingRight: 5
   }
+
   return (
     <div>
       <Link style={padding} to="/">Anecdotes</Link>
-      <Link style={padding} to="create">Create New</Link>
-      <Link style={padding} to="about">About</Link>
+      <Link style={padding} to="/create">Create New</Link>
+      <Link style={padding} to="/about">About</Link>
     </div>
   )
 }
 
-const Anecdote = ({ anecdotes }) => {
-  const id = useParams().id
-  const anecdote = anecdotes.find(n => Number(n.id) === Number(id))
+const Anecdote = ({ anecdote }) => {
+  const marginBottom = {
+    marginBottom: '2vh'
+  }
 
   return (
     <div>
       <h2>{anecdote.content} by {anecdote.author}</h2>
-      <div>has {anecdote.votes} votes</div>
-      <div>for more info, see: {anecdote.info}</div>
-      <br />
+      <div style={marginBottom}>has {anecdote.votes} votes</div>
+      <div style={marginBottom}>for more info, see: {anecdote.info}</div>
     </div>
   )
 }
@@ -130,6 +129,11 @@ const App = () => {
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
     setAnecdotes(anecdotes.concat(anecdote))
+    // Implement pendingTimeoutHandler to avoid < 10s on multiple post creation
+    setNotification(`A new anecdote: ${anecdote.content}`)
+    setTimeout(() => {
+      setNotification('')
+    }, 1000)
   }
 
   const anecdoteById = (id) =>
@@ -146,29 +150,33 @@ const App = () => {
     setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
   }
 
-  return (
-    <Router>
-      <div>
-        <h1>Software anecdotes</h1>
-        <Menu />
-        <Switch>
-          <Route path="/create">
-            <CreateNew addNew={addNew} />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/anecdotes/:id">
-            <Anecdote anecdotes={anecdotes} />
-          </Route>
-          <Route path="/">
-            <AnecdoteList anecdotes={anecdotes} />
-          </Route>
-        </Switch>
+  const match = useRouteMatch('/anecdotes/:id')
+  const anecdote = match
+    ? anecdotes.find(anecdote => Number(anecdote.id) === Number(match.params.id))
+    : null
 
-        <Footer />
-      </div>
-    </Router>
+  return (
+    <div>
+      <h1>Software anecdotes</h1>
+      <Menu />
+      {notification === '' ? <></> : <div>{notification}</div>}
+      <Switch>
+        <Route path="/create">
+          <CreateNew addNew={addNew} />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/anecdotes/:id">
+          <Anecdote anecdote={anecdote} />
+        </Route>
+        <Route path="/">
+          <AnecdoteList anecdotes={anecdotes} />
+        </Route>
+      </Switch>
+
+      <Footer />
+    </div>
   )
 }
 

@@ -31,9 +31,6 @@ export const toggleNotification = (content, time) => {
             pendingTimeoutHandler: setTimeout(() => { dispatch(clearNotification()) }, time * 1000),
         }
 
-        // setTimeout(() => {
-        //     dispatch(clearNotification())
-        // }, time * 1000)
         dispatch({
             type: 'SHOW_NOTIFICATION',
             data: newObj
@@ -46,15 +43,6 @@ export const clearNotification = () => {
         type: 'CLEAR',
     })
 }
-// export const initializeAnecdotes = () => {
-//     return async dispatch => {
-//       const anecdotes = await anecdotesService.getAll()
-//       dispatch({
-//         type: 'INIT_ANECDOTES',
-//         data: anecdotes,
-//       })
-//     }
-//   }
 
 
 export default notificationReducer
