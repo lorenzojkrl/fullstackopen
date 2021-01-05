@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import getCountry from './services/getCountry'
 
 const useField = (type) => {
   const [value, setValue] = useState('')
@@ -19,8 +20,12 @@ const useCountry = (name) => {
   const [country, setCountry] = useState(null)
 
   useEffect(() => {
-    console.log('this has to be something to avoid error')
-  })
+    axios
+      .get(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`)
+      .then(response => setCountry(response))
+  }, [name])
+
+  console.log('in use country with country ', country);
 
   return country
 }
@@ -40,10 +45,10 @@ const Country = ({ country }) => {
 
   return (
     <div>
-      <h3>{country.data.name} </h3>
-      <div>capital {country.data.capital} </div>
-      <div>population {country.data.population}</div>
-      <img src={country.data.flag} height='100' alt={`flag of ${country.data.name}`} />
+      <h3>{country.data[0].name} </h3>
+      <div>capital {country.data[0].capital} </div>
+      <div>population {country.data[0].population}</div>
+      <img src={country.data[0].flag} height='100' alt={`flag of ${country.data[0].name}`} />
     </div>
   )
 }
@@ -56,6 +61,7 @@ const App = () => {
   const fetch = (e) => {
     e.preventDefault()
     setName(nameInput.value)
+
   }
 
   return (
