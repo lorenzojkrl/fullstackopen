@@ -22,7 +22,6 @@ const Weather = ({ capital }) => {
 
     return hasData ? (
         <div>
-            {/* {console.log("Inside Weather response", weather)} */}
             <h3>Weather in {capital} </h3>
             <p>Temperature: {weather.temperature} Celsius</p>
             <p><img src={weather.icon} alt="icon" /></p>
