@@ -51,14 +51,6 @@ const App = () => {
                 console.log("Error, no data from server")
               })
           })
-          .catch(error => {
-            setSuccess(false)
-            setNotification(`Information of ${newName} has already been removed from server`)
-            setTimeout(() => {
-              setNotification('')
-            }, 3000);
-          })
-
       }
     } else {
       personsService
@@ -104,7 +96,12 @@ const App = () => {
             })
         })
         .catch(error => {
-          console.log('fail')
+          setSuccess(false)
+          setNotification(`Info on ${deleteThis.name} has already been removed`)
+          setTimeout(() => {
+            setNotification('')
+          }, 3000);
+          console.log('fail', error)
         })
     }
   }
