@@ -11,13 +11,13 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [showFilter, setShowFilter] = useState('')
   const [notification, setNotification] = useState('')
-  const [isSuccessful, setSuccess] = useState(true) // this is used to select which notification class to use in Notification.js. Not efficient but it works, to be reviewed
+  const [isSuccessful, setSuccess] = useState(true)
 
   useEffect(() => {
     personsService
-      .getAll() // calls axios.get passing url, , returns response.data
+      .getAll()
       .then(dbData => {
-        setPersons(dbData) // Assigns persons in db.json to persons
+        setPersons(dbData)
       })
   }, [])
 
@@ -29,17 +29,13 @@ const App = () => {
       number: newNumber
     }
 
-    // Not so elegant, to be reviewed
     const isNameDuplicate = persons.filter(person => person.name === newName);
     const found = persons.find(element => element.name === newName);
-    // console.log("found id: ", found.id)
     if (isNameDuplicate.length !== 0) {
       if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
         personsService
           .update(found.id, contactObj)
           .then(returnedContact => {
-            // Fetch everything from db.json again, not efficient but re-render component immediately after .update
-            // I should try to update useState index
             personsService
               .getAll() // calls axios.get passing url, , returns response.data
               .then(dbData => {
@@ -76,7 +72,6 @@ const App = () => {
           setTimeout(() => {
             setNotification('')
           }, 3000);
-          // console.log(`${contactObj.name} added`)
         })
         .catch(err => {
           console.log(`Here: ${JSON.stringify(err.response.data)}`)
@@ -94,21 +89,13 @@ const App = () => {
 
   const removeContact = event => {
     event.preventDefault()
-    // Change to name of the contact to be deleted!
-    // Remove Number() because id is generated as a number by DB
-    // console.log(persons.find(person => person.id === event.target.value))
-    let deleteThis = persons.find(person => person.id === event.target.value)
-    // console.log(`${deleteThis.name} TO BE removed`)
+    let deleteThis = persons.find(person => Number(person.id) === Number(event.target.value))
 
     let delConfirmed = window.confirm(`Delete ${deleteThis.name}`)
-    // console.log(delConfirmed)
     if (delConfirmed) {
-      // console.log(`remove ${event.target.value}`)
-
       personsService
         .remove(event.target.value)
         .then(outcome => {
-          // console.log(outcome) // confirm deletion in console
           // Fetch everything from db.json again, not efficient but re-render component immediately after .delete
           personsService
             .getAll() // calls axios.get passing url, , returns response.data
@@ -120,10 +107,6 @@ const App = () => {
           console.log('fail')
         })
     }
-    // setNewName(' ')
-    // setPersons(persons)
-
-
   }
 
   const handleNewName = event => {
@@ -133,14 +116,6 @@ const App = () => {
   const handleNewNumber = event => {
     setNewNumber(event.target.value)
   }
-
-  // Functionality changed to allow number updates
-  // const isNameDuplicate = persons.filter(person => person.name === newName);
-  // if (isNameDuplicate.length !== 0) {
-  //   window.alert(`${newName} is already added to phonebook`)
-  //   setNewName('')
-  // }
-
 
   const handleFilter = event => {
     setShowFilter(event.target.value)
@@ -173,7 +148,6 @@ const App = () => {
         persons={contactsToShow}
         removeContact={removeContact}
       />
-
 
     </div>
   )
