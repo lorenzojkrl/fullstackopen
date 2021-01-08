@@ -1,0 +1,30 @@
+GET http://localhost:3001/api/persons/
+
+# Add person
+# POST http://localhost:3001/api/persons
+# Content-Type: application/json
+
+# {
+#     "name": "Hobbit",
+#     "number": "12-556884"
+# }
+
+# Name missing: error handling
+# POST http://localhost:3001/api/persons
+# Content-Type: application/json
+
+# {
+#     "name": "",
+#     "number": "12-556884"
+# }
+
+# Error handling: Name must be unique
+# POST http://localhost:3001/api/persons
+# Content-Type: application/json
+
+# {
+#     "name": "Arto Hellas",
+#     "number": "12-556884"
+# }
+
+# DELETE http://localhost:3001/api/persons/1
