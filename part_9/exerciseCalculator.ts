@@ -1,3 +1,8 @@
+interface InputValues {
+  targetHours: number;
+  dailyHoursArray: Array<number>
+}
+
 interface Metrics {
   periodLength: number,
   trainingDays: number,
@@ -8,7 +13,7 @@ interface Metrics {
   average: number
 }
 
-let sampleArray = [3, 0, 2, 4.5, 0, 3, 1]
+// let sampleArray = [3, 0, 2, 4.5, 0, 3, 1]
 const calculateExercises = (dailyHours: Array<number>, targetHours: number) : Metrics => {
   let trainingDays: number = dailyHours.filter(num => num !== 0).length
   let avg = dailyHours.reduce((a, b) => a + b, 0)/dailyHours.length
@@ -39,4 +44,33 @@ const calculateExercises = (dailyHours: Array<number>, targetHours: number) : Me
 
 }
 
-console.log(calculateExercises(sampleArray, 2));
+const parseArguments = (args: Array<string>) : InputValues => {
+  if (args.length < 4) throw new Error('Not enough arguments');
+
+  let dailyHoursArray = args.slice(3).map(time => {
+    if(time !== ' '){
+      return +time
+    }
+  })
+  console.log();
+  
+  if (!isNaN(Number(args[2])) && !dailyHoursArray.includes(NaN)) {
+    return {
+      dailyHoursArray: dailyHoursArray,
+      targetHours: Number(args[2])
+    }
+  } else {
+    throw new Error('Provided values were not numbers!');
+  }
+}
+
+try{
+  const {targetHours, dailyHoursArray} = parseArguments(process.argv)
+  // console.log('targetH', targetHours);
+  // console.log('daily', dailyHoursArray);
+  
+  console.log(calculateExercises(dailyHoursArray, targetHours));
+
+}catch(e){
+  console.log('Error, something bad happened, message: ', e.message);
+}
