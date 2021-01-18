@@ -21,6 +21,7 @@
   "author": "Lorenzo Z",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^4.17.11",
     "@types/node": "^14.14.21"
   },
   "dependencies": {

@@ -1,7 +1,9 @@
-const express = require('express');
+import express = require('express');
+// import express from 'express';
 const app = express();
 
-app.get('/ping', (req, res) => {
+// Adding _ in front of an unused variable to silence warning
+app.get('/ping', (_req, res) => {
   res.send('pong');
 });
 
