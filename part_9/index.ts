@@ -1,5 +1,12 @@
-const multiplicator = (a, b, printText) => {
-  console.log(printText,  a * b);
-}
+const express = require('express');
+const app = express();
 
-multiplicator(2, 4, 'Multiplied numbers 2 and 4, the result is:');
+app.get('/ping', (req, res) => {
+  res.send('pong');
+});
+
+const PORT = 3003;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
