@@ -20,9 +20,7 @@ app.get(`/bmi?`, (req: any, res: any) => {
       } else {
         res
             .status(400)
-            .send(
-            { error: "malformatted parameters" }
-          );
+            .send({ error: "malformatted parameters" });
       }
 })
 
