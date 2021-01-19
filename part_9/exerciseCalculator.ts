@@ -52,7 +52,6 @@ const parseArguments = (args: Array<string>) : InputValues => {
       return +time;
     }
   });
-  console.log();
   
   if (!isNaN(Number(args[2])) && !dailyHoursArray.includes(NaN)) {
     return {
