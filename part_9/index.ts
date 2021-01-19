@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 
-app.get('/ping', (_req, res) => {
-  res.send('pong');
+app.get('/hello', (_req: any, res: { send: (arg0: string) => void; }) => {
+  res.send('Hello Full Stack!');
 });
 
 const PORT = 3003;
