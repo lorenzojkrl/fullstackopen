@@ -15,20 +15,20 @@ interface Metrics {
 
 // let sampleArray = [3, 0, 2, 4.5, 0, 3, 1]
 const calculateExercises = (dailyHours: Array<number>, targetHours: number) : Metrics => {
-  let trainingDays: number = dailyHours.filter(num => num !== 0).length
-  let avg = dailyHours.reduce((a, b) => a + b, 0)/dailyHours.length
+  const trainingDays: number = dailyHours.filter(num => num !== 0).length;
+  const avg = dailyHours.reduce((a, b) => a + b, 0)/dailyHours.length;
 
-  let isSuccessful: boolean = true
-  let rating = 3
-  let ratingDescription = 'You made it! You achieved your target!'
+  let isSuccessful = true;
+  let rating = 3;
+  let ratingDescription = 'You made it! You achieved your target!';
   if(avg<targetHours) {
-    isSuccessful = false
+    isSuccessful = false;
     if(avg > .8*targetHours){
-      rating = 2
-      ratingDescription = 'You almost made it! Good Effort!'
+      rating = 2;
+      ratingDescription = 'You almost made it! Good Effort!';
     }else{
-      rating = 1
-      ratingDescription = 'It seems you weren\'t to focused this time'
+      rating = 1;
+      ratingDescription = 'It seems you weren\'t to focused this time';
     }
   }
 
@@ -40,37 +40,39 @@ const calculateExercises = (dailyHours: Array<number>, targetHours: number) : Me
     ratingDescription: ratingDescription,
     target: targetHours,
     average: avg
-  } 
+  }; 
 
-}
+};
 
 const parseArguments = (args: Array<string>) : InputValues => {
   if (args.length < 4) throw new Error('Not enough arguments');
 
-  let dailyHoursArray = args.slice(3).map(time => {
+  const dailyHoursArray = args.slice(3).map(time => {
     if(time !== ' '){
-      return +time
+      return +time;
     }
-  })
+  });
   console.log();
   
   if (!isNaN(Number(args[2])) && !dailyHoursArray.includes(NaN)) {
     return {
       dailyHoursArray: dailyHoursArray,
       targetHours: Number(args[2])
-    }
+    };
   } else {
     throw new Error('Provided values were not numbers!');
   }
-}
+};
 
 try{
-  const {targetHours, dailyHoursArray} = parseArguments(process.argv)
+  const {targetHours, dailyHoursArray} = parseArguments(process.argv);
   // console.log('targetH', targetHours);
   // console.log('daily', dailyHoursArray);
   
   console.log(calculateExercises(dailyHoursArray, targetHours));
 
 }catch(e){
-  console.log('Error, something bad happened, message: ', e.message);
+  if(e instanceof Error){
+    console.log('Error, something bad happened, message: ', e.message);
+  }
 }

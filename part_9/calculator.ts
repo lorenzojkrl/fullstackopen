@@ -6,7 +6,7 @@
 // Since the defined type is a union of three possible values, 
 // it is handy to give it an alias that has a representative name.
 type Operation = 'multiply' | 'add' | 'divide';
-type Result = number
+type Result = number;
 const calculator = (a: number, b: number, op: Operation): Result => {
     switch(op){
       case 'multiply':
@@ -19,10 +19,12 @@ const calculator = (a: number, b: number, op: Operation): Result => {
       default:
         throw new Error('Operation is not multiply, add or divide!');
     }
-  }
+  };
   
   try {
-    console.log(calculator(1, 5 , 'divide'))
+    console.log(calculator(1, 5 , 'divide'));
   } catch (e) {
-    console.log('Something went wrong, error message: ', e.message);
+    if( e instanceof Error){
+      console.log('Something went wrong, error message: ', e.message);
+    }
   }

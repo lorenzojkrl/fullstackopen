@@ -1,5 +1,5 @@
 const calculateBmi = (height: number, weight: number) : string => {
-    let bmi = weight/(height/100)**2;
+    const bmi = weight/(height/100)**2;
     if(bmi < 25){
         return 'Normal (Healthy Weight)';
     }else if (bmi >= 30){
@@ -7,6 +7,6 @@ const calculateBmi = (height: number, weight: number) : string => {
     }else{
         return 'Overweight (Unhealthy Weight)';
     }
-}
+};
 
-export {calculateBmi}
+export {calculateBmi};
