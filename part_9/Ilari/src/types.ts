@@ -1,5 +1,6 @@
 export type Weather = "sunny" | "rainy" | "cloudy" | "windy" | "stormy";
 export type Visibility = "great" | "good" | "ok" | "poor";
+export type NonSensitiveDiaryEntry = Omit<DiaryEntry, "comment">;
 
 // if we want to be able to save entries without a certain field,
 // e.g. comment,
