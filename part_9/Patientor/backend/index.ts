@@ -1,7 +1,8 @@
-import express from 'express';
+// import express from 'express';
+const express require('express');
+
 const app = express();
 app.use(express.json());
-
 const PORT = 3000;
 
 app.get('/ping', (_req, res) => {
