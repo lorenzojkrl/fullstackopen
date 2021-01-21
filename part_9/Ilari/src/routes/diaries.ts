@@ -26,7 +26,9 @@ router.post("/", (req, res) => {
     const addedEntry = diaryService.addDiary(newDiaryEntry);
     res.json(addedEntry);
   } catch (e) {
-    res.status(400).send(e.message);
+    if (e instanceof Error) {
+      res.status(400).send(e.message);
+    }
   }
   /*
   const { date, weather, visibility, comment } = req.body;

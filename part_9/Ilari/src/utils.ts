@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NewDiaryEntry, Weather, Visibility } from "./types";
 
 // Validate comment is string
@@ -27,7 +30,7 @@ const isString = (text: any): text is string => {
   */
 const parseComment = (comment: any): string => {
   if (!comment || !isString(comment)) {
-    throw new Error("Incorrect or missing comment: " + comment);
+    throw new Error("Incorrect or missing comment:" + String(comment));
   }
 
   return comment;
@@ -40,7 +43,7 @@ const isDate = (date: string): boolean => {
 
 const parseDate = (date: any): string => {
   if (!date || !isString(date) || !isDate(date)) {
-    throw new Error("Incorrect or missing date: " + date);
+    throw new Error("Incorrect or missing date: " + String(date));
   }
   return date;
 };
@@ -71,7 +74,7 @@ const isWeather = (param: any): param is Weather => {
 
 const parseWeather = (weather: any): Weather => {
   if (!weather || !isWeather(weather)) {
-    throw new Error("Incorrect or missing weather: " + weather);
+    throw new Error("Incorrect or missing weather: " + String(weather));
   }
   return weather;
 };
@@ -83,7 +86,7 @@ const isVisibility = (param: any): param is Visibility => {
 
 const parseVisibility = (visibility: any): Visibility => {
   if (!visibility || !isVisibility(visibility)) {
-    throw new Error("Incorrect or missing visibility: " + visibility);
+    throw new Error("Incorrect or missing visibility: " + String(visibility));
   }
   return visibility;
 };

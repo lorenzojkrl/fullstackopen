@@ -21,6 +21,6 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./part_9/Ilari/tsconfig.json"
+    "project": "./tsconfig.json"
   }
 }
