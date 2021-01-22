@@ -91,6 +91,8 @@ const parseVisibility = (visibility: any): Visibility => {
   return visibility;
 };
 
+// define a function toNewDiaryEntry that receives the request body as a parameter
+// and returns a properly typed NewDiaryEntry object.
 const toNewDiaryEntry = (object: any): NewDiaryEntry => {
   return {
     date: parseDate(object.date),
