@@ -42,7 +42,7 @@ function App() {
             {store.getState()}
           </div>
           <button
-          // The action handlers of the buttons dispatch the right actions to the store.
+            // The action handlers of the buttons dispatch the right actions to the store.
             onClick={e => store.dispatch({ type: 'INCREMENT' })}
           >
             plus
@@ -75,3 +75,14 @@ const renderApp = () => {
 
 renderApp()
 store.subscribe(renderApp)
+
+// getState(), dispatch(), subscribe()
+// 1) Implement the state in the store 
+// 2) Create reducer, pass in the state of the store and actions
+// Reducer returns a new state based on the actions type.
+// 3) A reducer is never supposed to be called directly from the applications code
+// the reducer is only given as a parameter to the createStore function which creates the store
+// 4) The store now uses the reducer to handle actions, dispatch() 
+// 'send' to the store with its dispatch method.
+// 5) getState(), find out the state of the store
+// 6) subscribe() creates callback functions the store calls when its state is changed.
