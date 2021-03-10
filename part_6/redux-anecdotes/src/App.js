@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { createAnecdote } from './reducers/anecdoteReducer'
 
 const App = () => {
   const anecdotes = useSelector(state => state)
@@ -7,6 +8,16 @@ const App = () => {
 
   const vote = (id) => {
     console.log('vote', id)
+  }
+
+  const addAnecdote = event => {
+    event.preventDefault()
+    const content = event.target.anecdote.value
+    event.target.anecdote.value = ''
+    // The useDispatch hook provides any React component 
+    // access to the dispatch function of the redux store defined in index.js. 
+    // This allows all components to make changes to the state of the redux store.
+    dispatch(createAnecdote(content))
   }
 
   return (
@@ -24,8 +35,8 @@ const App = () => {
         </div>
       )}
       <h2>create new</h2>
-      <form>
-        <div><input /></div>
+      <form onSubmit={addAnecdote}>
+        <div><input name='anecdote' /></div>
         <button>create</button>
       </form>
     </div>
