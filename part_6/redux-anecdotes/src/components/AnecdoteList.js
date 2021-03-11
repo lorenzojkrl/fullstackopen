@@ -5,7 +5,7 @@ import { voteAnecdote } from '../reducers/anecdoteReducer'
 import { toggleNotification, clearNotification } from '../reducers/notificationReducer'
 
 const AnecdoteList = () => {
-  const anecdotes = useSelector(state => state.anecdotes)
+  const state = useSelector(state => state)
   const dispatch = useDispatch()
 
   const vote = (anecdote) => {
@@ -19,18 +19,21 @@ const AnecdoteList = () => {
 
   return (
     <div>
-      {anecdotes.sort((a, b) => a.votes > b.votes ? -1 : 1)
-        .map(anecdote =>
-          <div key={anecdote.id}>
-            <div>
-              {anecdote.content}
+      {
+        state.anecdotes
+          .filter(a => state.filter ? a.content.toLowerCase().includes(state.filter.toLowerCase()) : a)
+          .sort((a, b) => a.votes > b.votes ? -1 : 1)
+          .map(anecdote =>
+            <div key={anecdote.id}>
+              <div>
+                {anecdote.content}
+              </div>
+              <div>
+                has {anecdote.votes}
+                <button onClick={() => vote(anecdote)}>vote</button>
+              </div>
             </div>
-            <div>
-              has {anecdote.votes}
-              <button onClick={() => vote(anecdote)}>vote</button>
-            </div>
-          </div>
-        )
+          )
       }
     </div>
   );
