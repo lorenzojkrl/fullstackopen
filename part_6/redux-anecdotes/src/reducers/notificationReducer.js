@@ -1,18 +1,37 @@
-const notificationReducer = (state = 'amIright?', action) => {
+
+const notificationReducer = (state = null, action) => {
   switch (action.type) {
-    case 'NOTIFY':
-      return state
+    case 'SHOW_NOTIFICATION':
+      return action.data
+
+    case 'CLEAR':
+      return null
+
     default:
       return state
   }
 }
 
 // action creator 
-export const notifyUser = (message) => {
+export const toggleNotification = (content) => {
+  console.log('toggleNotification', content);
+
   return {
-    type: 'NOTIFY',
-    data: message
+    type: 'SHOW_NOTIFICATION',
+    data: content
   }
 }
 
+export const clearNotification = () => {
+  return ({
+    type: 'CLEAR',
+  })
+}
+
 export default notificationReducer
+
+
+
+
+
+
