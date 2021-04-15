@@ -51,25 +51,35 @@ const generateId = () =>
   Math.floor(Math.random() * 1000000)
 
 const App = () => {
-  const addNote = (event) => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
-    store.dispatch({
+
+  const toggleImportanceOf = (id) => {
+    return {
+      type: 'TOGGLE_IMPORTANCE',
+      data: { id }
+    }
+  }
+
+  const createNote = content => {
+    return {
       type: 'NEW_NOTE',
       data: {
         content,
         important: false,
         id: generateId()
       }
-    })
+    }
   }
 
+  const addNote = (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+    store.dispatch(createNote(content))
+  }
+
+
   const toggleImportance = (id) => {
-    store.dispatch({
-      type: 'TOGGLE_IMPORTANCE',
-      data: { id }
-    })
+    store.dispatch(toggleImportanceOf(id))
   }
 
   return (
