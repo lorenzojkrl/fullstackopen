@@ -8,19 +8,25 @@ const Notes = () => {
   const notes = useSelector(state => state)
   const dispatch = useDispatch()
 
-  const toggleImportance = (id) => {
-    dispatch(toggleImportanceOf(id))
+  const Note = ({ note, handleClick }) => {
+    return (
+      <li onClick={handleClick}>
+        {note.content}
+        <strong> {note.important ? 'important' : ''}</strong>
+      </li>
+    )
   }
 
   return (
     <ul>
       {notes.map(note =>
-        <li
+        <Note
           key={note.id}
-          onClick={() => toggleImportance(note.id)}
-        >
-          {note.content} <strong>{note.important ? 'important' : ''}</strong>
-        </li>
+          note={note}
+          handleClick={() =>
+            dispatch(toggleImportanceOf(note.id))
+          }
+        />
       )}
     </ul>
   );
