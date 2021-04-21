@@ -1,7 +1,7 @@
 const filterReducer = (state = false, action) => {
   switch (action.type) {
     case 'FILTER':
-      return state
+      return action.filterFor
     default:
       return state
   }
