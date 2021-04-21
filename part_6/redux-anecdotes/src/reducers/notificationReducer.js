@@ -1,8 +1,10 @@
 
-const notificationReducer = (state = 'Note this!', action) => {
+const notificationReducer = (state = '', action) => {
   switch (action.type) {
-    case 'NOTIFICATION':
+    case 'SET_NOTIFICATION':
       return action.notification
+    case 'REMOVE_NOTIFICATION':
+      return ''
     default:
       return state
   }
@@ -10,7 +12,14 @@ const notificationReducer = (state = 'Note this!', action) => {
 
 export const setNotification = notification => {
   return ({
-    type: 'NOTIFICATION',
+    type: 'SET_NOTIFICATION',
+    notification
+  })
+}
+
+export const removeNotification = notification => {
+  return ({
+    type: 'REMOVE_NOTIFICATION',
     notification
   })
 }
