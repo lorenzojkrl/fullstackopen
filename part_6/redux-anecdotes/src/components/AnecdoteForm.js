@@ -15,8 +15,8 @@ const AnecdoteForm = () => {
     // This could use setNotification, at this stage
     setTimeout(() => {
       dispatch(removeNotification(''))
-    }, 5000
-    )
+    }, 5000)
+
     event.target.anecdote.value = ''
   }
 
