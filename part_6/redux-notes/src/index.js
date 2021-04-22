@@ -9,6 +9,8 @@ import App from './App';
 import noteReducer from './reducers/noteReducer'
 import filterReducer from './reducers/filterReducer'
 
+import noteService from './services/notes'
+
 import reportWebVitals from './reportWebVitals';
 
 const reducer = combineReducers({
@@ -21,6 +23,16 @@ const store = createStore(
   composeWithDevTools()
 )
 
+noteService
+  .getAll()
+  .then(notes =>
+    notes.forEach(note => {
+      store.dispatch({
+        type: 'NEW_NOTE',
+        data: note
+      })
+    })
+  )
 
 ReactDOM.render(
   <Provider store={store}>
