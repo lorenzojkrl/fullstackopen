@@ -26,23 +26,27 @@ const noteReducer = (state = [], action) => {
         note.id !== id ? note : changedNote
       )
     }
+    case 'INIT_NOTES':
+      return action.data
     default:
       return state
   }
 }
 
-const generateId = () =>
-  Math.floor(Math.random() * 1000000)
+// const generateId = () =>
+//   Math.floor(Math.random() * 1000000)
 
 // action creator
-export const createNote = content => {
+export const createNote = data => {
   return {
     type: 'NEW_NOTE',
-    data: {
-      content,
-      important: false,
-      id: generateId()
-    }
+    data,
+    // backend generates id & noteService shapes the object
+    // data: {
+    //   content,
+    //   important: false,
+    //   id: generateId()
+    // }
   }
 }
 
@@ -51,6 +55,13 @@ export const toggleImportanceOf = (id) => {
   return {
     type: 'TOGGLE_IMPORTANCE',
     data: { id }
+  }
+}
+
+export const initializeNotes = (notes) => {
+  return {
+    type: 'INIT_NOTES',
+    data: notes,
   }
 }
 
