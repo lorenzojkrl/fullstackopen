@@ -11,6 +11,22 @@ const getAll = async () => {
   return responseData
 }
 
+const createAnecdote = async (newAnecdote) => {
+  const anecdoteObject = {
+    content: newAnecdote,
+    votes: 0
+  }
+
+  const createdAnecdote = await axios
+    .post(baseUrl, anecdoteObject)
+    .then(response => response.data)
+    .catch(error => console.log(error))
+
+  return createdAnecdote
+}
+
+
 export default {
-  getAll
+  getAll,
+  createAnecdote
 }

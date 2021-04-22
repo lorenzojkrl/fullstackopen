@@ -1,4 +1,6 @@
-import { asObject } from './store'
+// import { asObject } from './store'
+// asObject(action.payload) was used to assign an id and create an object anecdote
+// No the server assigns an id
 
 const reducer = (state = [], action) => {
   console.log('state now: ', state)
@@ -14,7 +16,7 @@ const reducer = (state = [], action) => {
       })
       return newState
     case 'CREATE':
-      return [...state, asObject(action.payload)]
+      return [...state, action.payload]
     case 'INIT':
       return action.payload
     default:
