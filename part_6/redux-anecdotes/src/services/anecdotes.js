@@ -25,8 +25,22 @@ const createAnecdote = async (newAnecdote) => {
   return createdAnecdote
 }
 
+const updateAnecdote = async (anecdote) => {
+  const updateAnecdote = {
+    content: anecdote.content,
+    votes: anecdote.votes + 1
+  }
+
+  const updatedAnecdote = await axios
+    .put(`http://localhost:3001/anecdotes/${anecdote.id}`, updateAnecdote)
+    .then(response => response.data)
+    .catch(error => console.log(error))
+
+  return updatedAnecdote
+}
 
 export default {
   getAll,
-  createAnecdote
+  createAnecdote,
+  updateAnecdote
 }
