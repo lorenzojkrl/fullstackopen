@@ -1,6 +1,6 @@
-import { initialState, asObject } from './store'
+import { asObject } from './store'
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = [], action) => {
   console.log('state now: ', state)
   console.log('action', action)
 
@@ -15,6 +15,8 @@ const reducer = (state = initialState, action) => {
       return newState
     case 'CREATE':
       return [...state, asObject(action.payload)]
+    case 'INIT':
+      return action.payload
     default:
       return state
   }
@@ -31,6 +33,13 @@ export const createAnecdote = content => {
   return {
     type: 'CREATE',
     payload: content
+  }
+}
+
+export const initializeAnecdotes = anecdotes => {
+  return {
+    type: 'INIT',
+    payload: anecdotes
   }
 }
 
