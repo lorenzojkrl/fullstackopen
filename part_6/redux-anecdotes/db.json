@@ -2,7 +2,7 @@
   "anecdotes": [
     {
       "content": "If it hurts, do it more often",
-      "votes": 3,
+      "votes": 29,
       "id": "47145"
     },
     {
@@ -49,6 +49,16 @@
       "content": "Is this working with Thunk?",
       "votes": 1,
       "id": "PqWMbGy"
+    },
+    {
+      "content": "This will stay for 10 seconds!",
+      "votes": 1,
+      "id": "Wrztb6o"
+    },
+    {
+      "content": "this one too!",
+      "votes": 0,
+      "id": "u2_ZmvD"
     }
   ]
 }
