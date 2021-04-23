@@ -44,6 +44,11 @@
       "content": "a new anecdote",
       "votes": 1,
       "id": "RiQ78fg"
+    },
+    {
+      "content": "Is this working with Thunk?",
+      "votes": 1,
+      "id": "PqWMbGy"
     }
   ]
 }
