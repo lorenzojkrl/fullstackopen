@@ -1,6 +1,4 @@
-// import { asObject } from './store'
-// asObject(action.payload) was used to assign an id and create an object anecdote
-// No the server assigns an id
+import anecdoteService from '../services/anecdotes'
 
 const reducer = (state = [], action) => {
   console.log('state now: ', state)
@@ -38,10 +36,13 @@ export const createAnecdote = content => {
   }
 }
 
-export const initializeAnecdotes = anecdotes => {
-  return {
-    type: 'INIT',
-    payload: anecdotes
+export const initializeAnecdotes = () => {
+  return async dispatch => {
+    const anecdotes = await anecdoteService.getAll()
+    dispatch({
+      type: 'INIT',
+      payload: anecdotes
+    })
   }
 }
 
