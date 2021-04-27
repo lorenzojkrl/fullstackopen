@@ -37,7 +37,7 @@
     },
     {
       "content": "sample4",
-      "important": true,
+      "important": false,
       "id": 8
     },
     {
@@ -47,8 +47,13 @@
     },
     {
       "content": "asd",
-      "important": true,
+      "important": false,
       "id": 10
+    },
+    {
+      "content": "A new note, April 27",
+      "important": true,
+      "id": 11
     }
   ]
 }
