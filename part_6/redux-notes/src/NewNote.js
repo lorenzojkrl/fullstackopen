@@ -1,10 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
+// import { useDispatch } from 'react-redux'
 import { createNote } from './reducers/noteReducer'
 // import noteService from './services/notes' not in use, because of r-thunk
 
-const NewNote = () => {
-  const dispatch = useDispatch()
+const NewNote = (props) => {
+  // const dispatch = useDispatch()
 
 
   const addNote = async (event) => {
@@ -13,7 +14,7 @@ const NewNote = () => {
     event.target.note.value = ''
     // const newNote = await noteService.createNew(content)
     // dispatch(createNote(newNote))
-    dispatch(createNote(content))
+    props.createNote(content)
   }
 
   return (
@@ -24,4 +25,10 @@ const NewNote = () => {
   );
 };
 
-export default NewNote;
+// export default NewNote;
+
+
+export default connect(
+  null, // the component does not need to access the store's state,
+  { createNote }
+)(NewNote)
