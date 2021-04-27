@@ -37,7 +37,7 @@
     },
     {
       "content": "Jamstack",
-      "votes": 2,
+      "votes": 3,
       "id": "L_q-27R"
     },
     {
@@ -74,6 +74,11 @@
       "content": "Notification is working just fine",
       "votes": 1,
       "id": "ErXmWM2"
+    },
+    {
+      "content": "AnecdoteForm is connected",
+      "votes": 0,
+      "id": "y8euOJZ"
     }
   ]
 }
