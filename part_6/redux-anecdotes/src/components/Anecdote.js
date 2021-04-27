@@ -8,8 +8,6 @@ const Anecdote = ({ anecdote }) => {
   const dispatch = useDispatch()
 
   const vote = async anecdoteVoted => {
-    // console.log('anecdoteVoteUpdated', anecdoteVoteUpdated);
-
     dispatch(voteAnecdote(anecdoteVoted))
     dispatch(setNotification(`You voted: ${anecdoteVoted.content}`, 5))
 
