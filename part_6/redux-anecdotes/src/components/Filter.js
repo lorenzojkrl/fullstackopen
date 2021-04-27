@@ -9,7 +9,7 @@ const Filter = (props) => {
 
   const handleChange = (event) => {
     // input-field value is in variable event.target.value
-    console.log(event.target.value);
+    // console.log(event.target.value);
     // dispatch(filterAnecdotes(event.target.value))
     props.filterAnecdotes(event.target.value)
 

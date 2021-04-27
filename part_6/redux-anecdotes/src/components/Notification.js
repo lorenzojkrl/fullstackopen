@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 const Notification = (props) => {
   // const notification = useSelector(state => state.notification)
 
-  const notification = props.notification
+  const state = props.notification
   const style = {
-    display: notification ? 'block' : 'none',
+    display: state.notification ? 'block' : 'none',
     border: 'solid',
     padding: 10,
     borderWidth: 1,
@@ -16,7 +16,7 @@ const Notification = (props) => {
 
   return (
     <div style={style}>
-      {notification}
+      {state.notification}
     </div>
   )
 }

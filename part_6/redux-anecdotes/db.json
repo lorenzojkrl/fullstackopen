@@ -2,18 +2,18 @@
   "anecdotes": [
     {
       "content": "If it hurts, do it more often",
-      "votes": 32,
+      "votes": 58,
       "id": "47145"
     },
     {
       "content": "Adding manpower to a late software project makes it later!",
-      "votes": 1,
+      "votes": 3,
       "id": "21149"
     },
     {
       "content": "The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.",
-      "id": "69581",
-      "votes": 0
+      "votes": 1,
+      "id": "69581"
     },
     {
       "content": "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
@@ -32,17 +32,17 @@
     },
     {
       "content": "Marmellata",
-      "votes": 1,
+      "votes": 42,
       "id": "hp5nZnn"
     },
     {
       "content": "Jamstack",
-      "votes": 3,
+      "votes": 10,
       "id": "L_q-27R"
     },
     {
       "content": "a new anecdote",
-      "votes": 1,
+      "votes": 2,
       "id": "RiQ78fg"
     },
     {
@@ -62,12 +62,12 @@
     },
     {
       "content": "Memento Audere Semper",
-      "votes": 0,
+      "votes": 2,
       "id": "cbXAZkv"
     },
     {
       "content": "Memento Audere Semper ",
-      "votes": 0,
+      "votes": 1,
       "id": "6MMCuGB"
     },
     {
@@ -77,8 +77,13 @@
     },
     {
       "content": "AnecdoteForm is connected",
-      "votes": 0,
+      "votes": 1,
       "id": "y8euOJZ"
+    },
+    {
+      "content": "Last anecdote",
+      "votes": 0,
+      "id": "-LqYFHa"
     }
   ]
 }

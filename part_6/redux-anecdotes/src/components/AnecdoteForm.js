@@ -14,7 +14,7 @@ const AnecdoteForm = (props) => {
     // dispatch(createAnecdote(anecdote))
     // dispatch(setNotification(`New anecdote created: ${anecdote}`, 10))
     props.createAnecdote(anecdote)
-    props.setNotification(`New anecdote created: ${anecdote}`, 10)
+    props.setNotification(`New anecdote created: ${anecdote}`, 5)
 
     event.target.anecdote.value = ''
   }
