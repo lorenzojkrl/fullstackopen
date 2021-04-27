@@ -2,7 +2,7 @@
   "anecdotes": [
     {
       "content": "If it hurts, do it more often",
-      "votes": 29,
+      "votes": 31,
       "id": "47145"
     },
     {
@@ -59,6 +59,16 @@
       "content": "this one too!",
       "votes": 0,
       "id": "u2_ZmvD"
+    },
+    {
+      "content": "Memento Audere Semper",
+      "votes": 0,
+      "id": "cbXAZkv"
+    },
+    {
+      "content": "Memento Audere Semper ",
+      "votes": 0,
+      "id": "6MMCuGB"
     }
   ]
 }
