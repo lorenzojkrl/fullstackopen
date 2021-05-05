@@ -82,6 +82,11 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
+    props.setNotification(`a new anecdote: ${content}`)
+    setTimeout(
+      () => props.setNotification(``),
+      10000
+    )
     history.push('/')
   }
 
@@ -153,14 +158,14 @@ const App = () => {
 
       <Router>
         <Menu />
-
+        {notification ? notification : ''}
         <Switch>
 
           <Route path="/anecdotes/:id">
             <Anecdote anecdotes={anecdotes} />
           </Route>
           <Route path="/create">
-            <CreateNew addNew={addNew} />
+            <CreateNew addNew={addNew} setNotification={setNotification} />
           </Route>
           <Route path="/about">
             <About />
