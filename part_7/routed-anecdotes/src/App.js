@@ -71,8 +71,11 @@ const Footer = () => (
 const CreateNew = (props) => {
   const history = useHistory()
   const content = useField('content')
+  const inputContent = { ...content }
   const author = useField('author')
+  const inputAuthor = { ...author }
   const info = useField('info')
+  const inputInfo = { ...info }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -90,10 +93,10 @@ const CreateNew = (props) => {
     history.push('/')
   }
 
-  const handleReset = (e) => {
-    content.reset()
-    author.reset()
-    info.reset()
+  const handleReset = () => {
+    content.onReset()
+    author.onReset()
+    info.onReset()
   }
 
   return (
@@ -102,15 +105,15 @@ const CreateNew = (props) => {
       <form onSubmit={handleSubmit} onReset={handleReset}>
         <div>
           content
-          <input {...content} />
+          <input {...inputContent} />
         </div>
         <div>
           author
-          <input {...author} />
+          <input {...inputAuthor} />
         </div>
         <div>
           url for more info
-          <input {...info} />
+          <input {...inputInfo} />
         </div>
         <button type='submit'>create</button>
         <button type='reset'>reset</button>
