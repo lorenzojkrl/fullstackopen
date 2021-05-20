@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { notifyUser } from './reducers/notificationReducer'
+import { initBlogs } from './reducers/blogsReducer'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -15,7 +16,7 @@ const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
 
-  const notificationState = useSelector(state => state)
+  const notificationState = useSelector(state => state.notification)
   const dispatch = useDispatch()
 
   console.log(notificationState);
