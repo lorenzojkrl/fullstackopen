@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { notifyUser } from './reducers/notificationReducer'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -12,9 +14,11 @@ import Footer from './components/Footer'
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
-  const [notification, setNotification] = useState({ message: null, isSuccessful: true })
 
+  const notificationState = useSelector(state => state)
+  const dispatch = useDispatch()
 
+  console.log(notificationState);
 
   useEffect(() => {
     blogService
@@ -49,9 +53,9 @@ const App = () => {
       setUser(user)
 
     } catch (exception) {
-      setNotification({ message: 'Wrong credentials', isSuccessful: false })
+      dispatch(notifyUser({ message: 'Wrong credentials', isSuccessful: false }))
       setTimeout(() => {
-        setNotification({ message: null })
+        dispatch(notifyUser({ message: null, isSuccessful: true }))
       }, 5000)
     }
   }
@@ -66,15 +70,15 @@ const App = () => {
 
       setBlogs(blogs.concat(returnedBlog))
       blogFormRef.current.toggleVisibility()
-      setNotification({ message: `A new blog: ${newBlog.title} by ${newBlog.author}`, isSuccessful: true })
+      dispatch(notifyUser({ message: `A new blog: ${newBlog.title} by ${newBlog.author}`, isSuccessful: true }))
       setTimeout(() => {
-        setNotification({ message: null })
+        dispatch(notifyUser({ message: null, isSuccessful: true }))
       }, 5000)
     } catch (exception) {
       console.log(exception);
-      setNotification({ message: `Something is wrong, ${exception}`, isSuccessful: false })
+      dispatch(notifyUser({ message: `Something is wrong, ${exception}`, isSuccessful: false }))
       setTimeout(() => {
-        setNotification({ message: null })
+        dispatch(notifyUser({ message: null, isSuccessful: true }))
       }, 5000)
     }
 
@@ -112,15 +116,15 @@ const App = () => {
       try {
         await blogService.remove(blogId)
         setBlogs(blogs.filter(b => b.id !== blogId))
-        setNotification({ message: `${blogToRemove.title} has been deleted`, isSuccessful: true })
+        dispatch(notifyUser({ message: `${blogToRemove.title} has been deleted`, isSuccessful: true }))
         setTimeout(() => {
-          setNotification({ message: null })
+          dispatch(notifyUser({ message: null, isSuccessful: true }))
         }, 5000)
       } catch (exception) {
         console.log('error_ :', exception)
-        setNotification({ message: 'An error occured', isSuccessful: false })
+        dispatch(notifyUser({ message: 'An error occured', isSuccessful: false }))
         setTimeout(() => {
-          setNotification({ message: null })
+          dispatch(notifyUser({ message: null, isSuccessful: true }))
         }, 5000)
       }
     }
@@ -133,7 +137,7 @@ const App = () => {
   if (user === null) {
     return (
       <>
-        <Notification message={notification} />
+        <Notification message={notificationState} />
         <LoginForm handleLogin={handleLogin} />
         <Footer />
       </>
@@ -148,7 +152,7 @@ const App = () => {
   console.log(blogs)
   return (
     <div>
-      <Notification message={notification} />
+      <Notification message={notificationState} />
       <h2>Blogs</h2>
       <p>{user.name} logged-in</p>
       <button onClick={cleanCredentials}>log out</button>

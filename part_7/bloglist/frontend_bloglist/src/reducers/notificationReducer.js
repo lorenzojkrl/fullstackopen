@@ -1,7 +1,8 @@
+const initialState = { message: null, isSuccessful: true }
 
-const notificationReducer = (state = '', action) => {
+const notificationReducer = (state = initialState, action) => {
 
-  switch (action) {
+  switch (action.type) {
     case 'NOTIFY':
       return action.payload
     default:
@@ -10,9 +11,11 @@ const notificationReducer = (state = '', action) => {
 
 }
 
-const notifyUser = (message) => {
+export const notifyUser = (messageObj) => {
   return {
     type: 'NOTIFY',
-    payload: message
+    payload: messageObj
   }
 }
+
+export default notificationReducer;
