@@ -33,11 +33,11 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
         </div>
         <div>{blog.author ?? `DON'T KNOW`}</div>
 
-        {/* {
-          blog.user.username === loggedUser.username
-            ? <button onClick={removeBlog}>remove</button>
+        {
+          blog.user
+            ? blog.user.username === loggedUser.username && <button onClick={removeBlog}>remove</button>
             : <></>
-        } */}
+        }
       </div>
 
     </div>

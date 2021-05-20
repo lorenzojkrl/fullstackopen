@@ -63,7 +63,6 @@ const App = () => {
 
     try {
       const returnedBlog = await blogService.create(newBlog)
-      console.log('here', returnedBlog);
 
       setBlogs(blogs.concat(returnedBlog))
       blogFormRef.current.toggleVisibility()
@@ -146,6 +145,7 @@ const App = () => {
     setUser(null)
   }
 
+  console.log(blogs)
   return (
     <div>
       <Notification message={notification} />
