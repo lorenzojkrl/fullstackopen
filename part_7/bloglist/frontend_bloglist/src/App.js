@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { notifyUser } from './reducers/notificationReducer'
-import { initBlogs } from './reducers/blogsReducer'
+import { initBlogs, modifyBlogs } from './reducers/blogsReducer'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -13,19 +13,17 @@ import Footer from './components/Footer'
 
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
 
   const notificationState = useSelector(state => state.notification)
+  const blogsNEW = useSelector(state => state.blogs)
   const dispatch = useDispatch()
-
-  console.log(notificationState);
 
   useEffect(() => {
     blogService
       .getAll()
-      .then(blogs => setBlogs(blogs))
-  }, [])
+      .then(blogs => dispatch(initBlogs(blogs)))
+  }, [dispatch])
 
   useEffect(() => {
     // Search for token in local storage
@@ -69,7 +67,7 @@ const App = () => {
     try {
       const returnedBlog = await blogService.create(newBlog)
 
-      setBlogs(blogs.concat(returnedBlog))
+      dispatch(modifyBlogs(blogsNEW.concat(returnedBlog)))
       blogFormRef.current.toggleVisibility()
       dispatch(notifyUser({ message: `A new blog: ${newBlog.title} by ${newBlog.author}`, isSuccessful: true }))
       setTimeout(() => {
@@ -98,25 +96,25 @@ const App = () => {
   )
 
   const addLike = async (blogId) => {
-    const blog = blogs.find(b => b.id === blogId)
+    const blog = blogsNEW.find(b => b.id === blogId)
     const updatedBlog = { ...blog, likes: blog.likes + 1 }
 
     try {
       const returnedBlog = await blogService.update(blogId, updatedBlog)
-      setBlogs(blogs.map(blog => blog.id !== blogId ? blog : returnedBlog))
+      dispatch(modifyBlogs(blogsNEW.map(blog => blog.id !== blogId ? blog : returnedBlog)))
     } catch (exception) {
       console.log('error_ :', exception)
     }
   }
 
   const removeBlog = async (blogId) => {
-    const blogToRemove = blogs.find(b => b.id === blogId)
+    const blogToRemove = blogsNEW.find(b => b.id === blogId)
     console.log('blogToRemove', blogToRemove);
 
     if (window.confirm(`Delete ${blogToRemove.title} ?`)) {
       try {
         await blogService.remove(blogId)
-        setBlogs(blogs.filter(b => b.id !== blogId))
+        dispatch(modifyBlogs(blogsNEW.filter(b => b.id !== blogId)))
         dispatch(notifyUser({ message: `${blogToRemove.title} has been deleted`, isSuccessful: true }))
         setTimeout(() => {
           dispatch(notifyUser({ message: null, isSuccessful: true }))
@@ -150,7 +148,7 @@ const App = () => {
     setUser(null)
   }
 
-  console.log(blogs)
+  console.log(blogsNEW)
   return (
     <div>
       <Notification message={notificationState} />
@@ -158,7 +156,7 @@ const App = () => {
       <p>{user.name} logged-in</p>
       <button onClick={cleanCredentials}>log out</button>
       {blogForm()}
-      {blogs
+      {blogsNEW
         .sort((a, b) => b.likes - a.likes)
         .map(blog =>
           <Blog
