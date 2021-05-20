@@ -29,14 +29,15 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
         <div>{blog.url}</div>
         <div>
           {blog.likes}
-          <button onClick={updateBlog}>like</button>
+          <button onClick={() => updateBlog(blog.id)}>like</button>
         </div>
-        <div>{blog.author}</div>
-        {
+        <div>{blog.author ?? `DON'T KNOW`}</div>
+
+        {/* {
           blog.user.username === loggedUser.username
             ? <button onClick={removeBlog}>remove</button>
             : <></>
-        }
+        } */}
       </div>
 
     </div>

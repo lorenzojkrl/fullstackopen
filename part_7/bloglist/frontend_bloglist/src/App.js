@@ -17,9 +17,9 @@ const App = () => {
 
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs(blogs)
-    )
+    blogService
+      .getAll()
+      .then(blogs => setBlogs(blogs))
   }, [])
 
   useEffect(() => {
@@ -58,9 +58,13 @@ const App = () => {
 
 
   const addBlog = async (newBlog) => {
+    console.log('user', user);
+    console.log('newBlog', newBlog);
 
     try {
       const returnedBlog = await blogService.create(newBlog)
+      console.log('here', returnedBlog);
+
       setBlogs(blogs.concat(returnedBlog))
       blogFormRef.current.toggleVisibility()
       setNotification({ message: `A new blog: ${newBlog.title} by ${newBlog.author}`, isSuccessful: true })
@@ -68,7 +72,8 @@ const App = () => {
         setNotification({ message: null })
       }, 5000)
     } catch (exception) {
-      setNotification({ message: `Title and Url are necessary`, isSuccessful: false })
+      console.log(exception);
+      setNotification({ message: `Something is wrong, ${exception}`, isSuccessful: false })
       setTimeout(() => {
         setNotification({ message: null })
       }, 5000)
